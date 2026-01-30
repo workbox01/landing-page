@@ -2,24 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Order Page</title>
+<title>Order Now</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==================================================
-   THEME SETTINGS (EDIT COLORS HERE)
+   THEME / EASY EDIT ZONE
    ================================================== */
 :root {
-  --primary-color: #111111;     /* Main button color */
-  --secondary-color: #ffffff;   /* Page background */
-  --accent-color: #e63946;      /* Accent / highlights */
-  --background-color: #f4f4f4;  /* Body background */
-  --border-color: #dddddd;
-  --text-color: #222222;
-  --button-disabled: #888888;
+  --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --accent: #00f5d4;
+  --text-main: #ffffff;
+  --text-muted: #bbbbbb;
+  --button-bg: #00f5d4;
+  --button-text: #000000;
 }
 
 /* ==================================================
-   GLOBAL STYLES
+   GLOBAL RESET
    ================================================== */
 * {
   box-sizing: border-box;
@@ -27,68 +31,83 @@
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--background-color);
-  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px 10px;
 }
 
 /* ==================================================
-   PAGE CONTAINER
+   MAIN CARD
    ================================================== */
-.page {
-  max-width: 500px;
-  margin: auto;
-  background: var(--secondary-color);
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  overflow: hidden;
+  animation: fadeUp 0.8s ease;
 }
 
 /* ==================================================
    HERO IMAGE
    ================================================== */
-.hero img {
+.hero img,
+.footer img {
   width: 100%;
   display: block;
 }
 
 /* ==================================================
-   SECTIONS
+   CONTENT SECTIONS
    ================================================== */
 .section {
-  padding: 16px;
-  border-bottom: 1px solid var(--border-color);
+  padding: 18px;
+  animation: fadeUp 1s ease;
 }
 
-.section-title {
-  font-size: 18px;
+.title {
+  font-size: 20px;
+  font-weight: 600;
   margin-bottom: 10px;
-  font-weight: bold;
 }
 
-/* ==================================================
-   PRICE DISPLAY
-   ================================================== */
-.price-box {
+.price {
+  font-size: 28px;
+  font-weight: 700;
   text-align: center;
-  font-size: 22px;
-  font-weight: bold;
+  color: var(--accent);
 }
 
 /* ==================================================
    FORM ELEMENTS
    ================================================== */
 label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
 input,
 textarea,
 select {
   width: 100%;
-  padding: 12px;
+  margin-top: 6px;
   margin-bottom: 14px;
-  border: 1px solid var(--border-color);
-  font-size: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 15px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #cccccc;
 }
 
 textarea {
@@ -96,51 +115,60 @@ textarea {
 }
 
 /* ==================================================
-   ORDER BUTTON
+   BUTTON
    ================================================== */
-.order-button {
+button {
   width: 100%;
   padding: 16px;
   font-size: 18px;
-  background: var(--primary-color);
-  color: var(--secondary-color);
+  font-weight: 600;
+  background: var(--button-bg);
+  color: var(--button-text);
   border: none;
+  border-radius: 14px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.order-button:disabled {
-  background: var(--button-disabled);
-  cursor: not-allowed;
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* ==================================================
+   ANIMATIONS
+   ================================================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<div class="card">
 
-  <!-- ==================================================
-       HERO / LONG IMAGE
-       ================================================== -->
+  <!-- HERO IMAGE -->
   <div class="hero">
-    <img src="product.jpg" alt="Product Image">
+    <img src="product.jpg" alt="Product">
   </div>
 
-  <!-- ==================================================
-       PRICE SECTION
-       ================================================== -->
+  <!-- PRICE -->
   <div class="section">
-    <div class="section-title">Price</div>
-    <div class="price-box">
-      <span id="price">50</span> DH
-    </div>
+    <div class="title">Total Price</div>
+    <div class="price"><span id="price">50</span> DH</div>
   </div>
 
-  <!-- ==================================================
-       QUANTITY SECTION
-       ================================================== -->
+  <!-- QUANTITY -->
   <div class="section">
-    <div class="section-title">Quantity</div>
+    <div class="title">Quantity</div>
     <select id="quantity">
       <option value="1">1 item</option>
       <option value="2">2 items</option>
@@ -150,69 +178,56 @@ textarea {
     </select>
   </div>
 
-  <!-- ==================================================
-       CUSTOMER DETAILS
-       ================================================== -->
+  <!-- CUSTOMER INFO -->
   <div class="section">
-    <div class="section-title">Your Details</div>
+    <div class="title">Your Information</div>
 
     <label>Full Name</label>
     <input type="text" placeholder="Your name">
 
-    <label>Phone Number</label>
+    <label>Phone</label>
     <input type="text" placeholder="06XXXXXXXX">
 
     <label>Email</label>
     <input type="email" placeholder="example@gmail.com">
 
-    <label>Shipping Address</label>
-    <textarea placeholder="City, street, more details"></textarea>
+    <label>Address</label>
+    <textarea placeholder="City, street, details"></textarea>
 
     <label>Remarks (optional)</label>
-    <textarea placeholder="Notes for delivery"></textarea>
+    <textarea placeholder="Notes"></textarea>
   </div>
 
-  <!-- ==================================================
-       ORDER BUTTON
-       ================================================== -->
+  <!-- BUTTON -->
   <div class="section">
-    <button class="order-button" disabled>
-      ORDER NOW
-    </button>
+    <button>ORDER NOW</button>
+  </div>
+
+  <!-- FOOTER IMAGE -->
+  <div class="footer">
+    <img src="footer.jpg" alt="End">
   </div>
 
 </div>
 
 <!-- ==================================================
-     JAVASCRIPT LOGIC
+     JAVASCRIPT (PRICE LOGIC)
      ================================================== -->
 <script>
-/* ==================================================
-   EDITABLE BUSINESS SETTINGS (SAFE TO EDIT)
-   ================================================== */
-
-// UNIT PRICE IN DH
+/* ===== EDITABLE BUSINESS SETTINGS ===== */
 const UNIT_PRICE = 50;
+const MAX_QTY = 5;
 
-// MAX QUANTITY
-const MAX_QUANTITY = 5;
+/* ===== LOGIC ===== */
+const quantity = document.getElementById("quantity");
+const price = document.getElementById("price");
 
-/* ==================================================
-   PRICE CALCULATION LOGIC
-   ================================================== */
+price.textContent = UNIT_PRICE;
 
-const quantitySelect = document.getElementById("quantity");
-const priceDisplay = document.getElementById("price");
-
-// Set initial price
-priceDisplay.textContent = UNIT_PRICE;
-
-// Update price when quantity changes
-quantitySelect.addEventListener("change", function () {
-  const quantity = parseInt(this.value);
-
-  if (quantity >= 1 && quantity <= MAX_QUANTITY) {
-    priceDisplay.textContent = quantity * UNIT_PRICE;
+quantity.addEventListener("change", () => {
+  const q = parseInt(quantity.value);
+  if (q >= 1 && q <= MAX_QTY) {
+    price.textContent = q * UNIT_PRICE;
   }
 });
 </script>
