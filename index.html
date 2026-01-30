@@ -64,6 +64,7 @@ body {
   padding: 18px;
   border-radius: 18px;
   animation: slideUp 0.8s ease;
+  overflow: visible; /* ✅ FIX: allow dropdown to overflow */
 }
 
 .card h2 {
@@ -110,6 +111,7 @@ body {
   margin-top: 8px;
   display: none;
   animation: dropDown 0.3s ease;
+  z-index: 1000; /* ✅ FIX: keep dropdown above other cards */
 }
 
 .quantity-list div {
