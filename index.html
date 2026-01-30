@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Order Page</title>
+<meta charset="UTF-8">
+<title>Order Now</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+  }
+
+  .container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+  }
+
+  .hero img {
+    width: 100%;
+    display: block;
+  }
+
+  .section {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+
+  .price {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+</style>
 </head>
+
 <body>
-  <h1>Landing page is live</h1>
-  <p>This will be replaced step by step.</p>
+
+<div class="container">
+
+  <!-- LONG IMAGE -->
+  <div class="hero">
+    <img src="product.jpg" alt="Product Image">
+  </div>
+
+  <!-- PRICE -->
+  <div class="section">
+    <div class="price">
+      Price: <span id="price">200</span> DH
+    </div>
+  </div>
+
+  <!-- QUANTITY -->
+  <div class="section">
+    <label>Quantity</label>
+    <select id="quantity">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+  </div>
+
+  <!-- CUSTOMER INFO -->
+  <div class="section">
+    <label>Full Name</label>
+    <input type="text" placeholder="Your name">
+
+    <label>Phone Number</label>
+    <input type="text" placeholder="06XXXXXXXX">
+
+    <label>Email</label>
+    <input type="email" placeholder="example@gmail.com">
+
+    <label>Shipping Address</label>
+    <textarea placeholder="City, street, details"></textarea>
+
+    <label>Remarks (optional)</label>
+    <textarea placeholder="Any notes"></textarea>
+  </div>
+
+  <!-- ORDER BUTTON -->
+  <div class="section">
+    <button disabled>ORDER NOW</button>
+  </div>
+
+</div>
+
 </body>
 </html>
