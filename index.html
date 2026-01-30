@@ -2,95 +2,151 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Order Now</title>
+<title>Order Page</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-  }
+/* ===============================
+   THEME VARIABLES (EDIT HERE)
+   =============================== */
+:root {
+  --primary-color: #111111;
+  --secondary-color: #ffffff;
+  --accent-color: #e63946;
+  --background-color: #f4f4f4;
+  --border-color: #dddddd;
+  --input-bg: #ffffff;
+  --button-disabled: #888888;
+  --text-color: #222222;
+}
 
-  .container {
-    max-width: 500px;
-    margin: auto;
-    background: white;
-  }
+/* ===============================
+   GLOBAL STYLES
+   =============================== */
+* {
+  box-sizing: border-box;
+}
 
-  .hero img {
-    width: 100%;
-    display: block;
-  }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+}
 
-  .section {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-  }
+/* ===============================
+   PAGE CONTAINER
+   =============================== */
+.page {
+  max-width: 500px;
+  margin: auto;
+  background: var(--secondary-color);
+}
 
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
+/* ===============================
+   HERO IMAGE
+   =============================== */
+.hero img {
+  width: 100%;
+  display: block;
+}
 
-  input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    font-size: 16px;
-  }
+/* ===============================
+   SECTIONS
+   =============================== */
+.section {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
 
-  button {
-    width: 100%;
-    padding: 15px;
-    font-size: 18px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
+.section-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
-  button:disabled {
-    background: gray;
-    cursor: not-allowed;
-  }
+/* ===============================
+   PRICE
+   =============================== */
+.price-box {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-  .price {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-  }
+/* ===============================
+   FORM ELEMENTS
+   =============================== */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ===============================
+   BUTTON
+   =============================== */
+.order-button {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  cursor: pointer;
+}
+
+.order-button:disabled {
+  background: var(--button-disabled);
+  cursor: not-allowed;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="page">
 
-  <!-- LONG IMAGE -->
+  <!-- HERO / LONG IMAGE -->
   <div class="hero">
-    <img src="product.jpg" alt="Product Image">
+    <img src="product.jpg" alt="Product">
   </div>
 
-  <!-- PRICE -->
+  <!-- PRICE SECTION -->
   <div class="section">
-    <div class="price">
-      Price: <span id="price">200</span> DH
+    <div class="section-title">Price</div>
+    <div class="price-box">
+      <span id="price">200</span> DH
     </div>
   </div>
 
-  <!-- QUANTITY -->
+  <!-- QUANTITY SECTION -->
   <div class="section">
-    <label>Quantity</label>
+    <div class="section-title">Quantity</div>
     <select id="quantity">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
+      <option value="1">1 item</option>
+      <option value="2">2 items</option>
+      <option value="3">3 items</option>
     </select>
   </div>
 
-  <!-- CUSTOMER INFO -->
+  <!-- CUSTOMER DETAILS -->
   <div class="section">
+    <div class="section-title">Your Details</div>
+
     <label>Full Name</label>
     <input type="text" placeholder="Your name">
 
@@ -101,19 +157,20 @@
     <input type="email" placeholder="example@gmail.com">
 
     <label>Shipping Address</label>
-    <textarea placeholder="City, street, details"></textarea>
+    <textarea placeholder="City, street, more details"></textarea>
 
     <label>Remarks (optional)</label>
-    <textarea placeholder="Any notes"></textarea>
+    <textarea placeholder="Notes for delivery"></textarea>
   </div>
 
   <!-- ORDER BUTTON -->
   <div class="section">
-    <button disabled>ORDER NOW</button>
+    <button class="order-button" disabled>
+      ORDER NOW
+    </button>
   </div>
 
 </div>
 
-  
 </body>
 </html>
