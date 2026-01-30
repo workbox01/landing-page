@@ -3,27 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Order Now</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- GOOGLE FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==================================================
-   THEME / EASY EDIT ZONE
+   EDITABLE DESIGN SETTINGS
    ================================================== */
 :root {
   --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  --card-bg: rgba(255, 255, 255, 0.08);
-  --accent: #00f5d4;
+  --card-bg: rgba(255,255,255,0.08);
+  --accent: #00ffd5;
   --text-main: #ffffff;
-  --text-muted: #bbbbbb;
-  --button-bg: #00f5d4;
-  --button-text: #000000;
+  --text-soft: #cccccc;
+  --price-color: #00ffd5;
 }
 
 /* ==================================================
-   GLOBAL RESET
+   RESET & GLOBAL
    ================================================== */
 * {
   box-sizing: border-box;
@@ -37,77 +35,103 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 30px 10px;
 }
 
 /* ==================================================
-   MAIN CARD
+   PAGE WRAPPER
    ================================================== */
-.card {
+.page {
   width: 100%;
-  max-width: 420px;
-  background: var(--card-bg);
-  backdrop-filter: blur(14px);
-  border-radius: 20px;
-  overflow: hidden;
-  animation: fadeUp 0.8s ease;
+  max-width: 480px;
+  animation: fadeIn 1s ease;
 }
 
 /* ==================================================
    HERO IMAGE
    ================================================== */
-.hero img,
-.footer img {
+.hero img {
   width: 100%;
   display: block;
 }
 
 /* ==================================================
-   CONTENT SECTIONS
+   GLASS CARD SECTIONS
    ================================================== */
-.section {
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  margin: 16px;
   padding: 18px;
-  animation: fadeUp 1s ease;
+  border-radius: 18px;
+  animation: slideUp 0.8s ease;
 }
 
-.title {
-  font-size: 20px;
+.card h2 {
+  margin: 0 0 12px;
   font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.price {
-  font-size: 28px;
-  font-weight: 700;
-  text-align: center;
-  color: var(--accent);
 }
 
 /* ==================================================
-   FORM ELEMENTS
+   PRICE DISPLAY
    ================================================== */
-label {
-  font-size: 14px;
-  color: var(--text-muted);
+.price {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--price-color);
+  text-align: center;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-input,
-textarea,
-select {
+.price.bump {
+  transform: scale(1.15);
+}
+
+/* ==================================================
+   QUANTITY DROPDOWN
+   ================================================== */
+.quantity-box {
+  position: relative;
+}
+
+.quantity-selected {
+  background: rgba(0,0,0,0.3);
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.quantity-list {
+  position: absolute;
   width: 100%;
-  margin-top: 6px;
-  margin-bottom: 14px;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255,255,255,0.15);
-  color: white;
-  font-size: 15px;
+  background: rgba(0,0,0,0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 8px;
+  display: none;
+  animation: dropDown 0.3s ease;
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: #cccccc;
+.quantity-list div {
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quantity-list div:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* ==================================================
+   FORM
+   ================================================== */
+input, textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 textarea {
@@ -122,38 +146,50 @@ button {
   padding: 16px;
   font-size: 18px;
   font-weight: 600;
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: none;
   border-radius: 14px;
+  border: none;
+  background: var(--accent);
+  color: #000;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 30px rgba(0,255,213,0.4);
+}
+
+/* ==================================================
+   FOOTER IMAGE
+   ================================================== */
+.footer img {
+  width: 100%;
+  margin-top: 20px;
 }
 
 /* ==================================================
    ANIMATIONS
    ================================================== */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes dropDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="page">
 
   <!-- HERO IMAGE -->
   <div class="hero">
@@ -161,45 +197,40 @@ button:hover {
   </div>
 
   <!-- PRICE -->
-  <div class="section">
-    <div class="title">Total Price</div>
-    <div class="price"><span id="price">50</span> DH</div>
+  <div class="card">
+    <h2>Total Price</h2>
+    <div id="price" class="price">50 DH</div>
   </div>
 
   <!-- QUANTITY -->
-  <div class="section">
-    <div class="title">Quantity</div>
-    <select id="quantity">
-      <option value="1">1 item</option>
-      <option value="2">2 items</option>
-      <option value="3">3 items</option>
-      <option value="4">4 items</option>
-      <option value="5">5 items</option>
-    </select>
+  <div class="card">
+    <h2>Quantity</h2>
+    <div class="quantity-box">
+      <div id="quantitySelected" class="quantity-selected">
+        1 item
+      </div>
+      <div id="quantityList" class="quantity-list">
+        <div data-q="1">1 item</div>
+        <div data-q="2">2 items</div>
+        <div data-q="3">3 items</div>
+        <div data-q="4">4 items</div>
+        <div data-q="5">5 items</div>
+      </div>
+    </div>
   </div>
 
-  <!-- CUSTOMER INFO -->
-  <div class="section">
-    <div class="title">Your Information</div>
-
-    <label>Full Name</label>
-    <input type="text" placeholder="Your name">
-
-    <label>Phone</label>
-    <input type="text" placeholder="06XXXXXXXX">
-
-    <label>Email</label>
-    <input type="email" placeholder="example@gmail.com">
-
-    <label>Address</label>
-    <textarea placeholder="City, street, details"></textarea>
-
-    <label>Remarks (optional)</label>
-    <textarea placeholder="Notes"></textarea>
+  <!-- FORM -->
+  <div class="card">
+    <h2>Your Details</h2>
+    <input placeholder="Full name">
+    <input placeholder="Phone number">
+    <input type="email" placeholder="Email (gmail)">
+    <textarea placeholder="Shipping address"></textarea>
+    <textarea placeholder="Remarks (optional)"></textarea>
   </div>
 
   <!-- BUTTON -->
-  <div class="section">
+  <div class="card">
     <button>ORDER NOW</button>
   </div>
 
@@ -210,25 +241,38 @@ button:hover {
 
 </div>
 
-<!-- ==================================================
-     JAVASCRIPT (PRICE LOGIC)
-     ================================================== -->
 <script>
-/* ===== EDITABLE BUSINESS SETTINGS ===== */
+/* ==================================================
+   EDITABLE BUSINESS SETTINGS
+   ================================================== */
 const UNIT_PRICE = 50;
-const MAX_QTY = 5;
 
-/* ===== LOGIC ===== */
-const quantity = document.getElementById("quantity");
-const price = document.getElementById("price");
+/* ==================================================
+   PRICE & QUANTITY LOGIC
+   ================================================== */
+const priceEl = document.getElementById("price");
+const quantitySelected = document.getElementById("quantitySelected");
+const quantityList = document.getElementById("quantityList");
 
-price.textContent = UNIT_PRICE;
+let currentQty = 1;
 
-quantity.addEventListener("change", () => {
-  const q = parseInt(quantity.value);
-  if (q >= 1 && q <= MAX_QTY) {
-    price.textContent = q * UNIT_PRICE;
-  }
+quantitySelected.addEventListener("click", () => {
+  quantityList.style.display =
+    quantityList.style.display === "block" ? "none" : "block";
+});
+
+quantityList.querySelectorAll("div").forEach(item => {
+  item.addEventListener("click", () => {
+    currentQty = parseInt(item.dataset.q);
+    quantitySelected.textContent = item.textContent;
+    quantityList.style.display = "none";
+
+    const newPrice = currentQty * UNIT_PRICE;
+    priceEl.textContent = newPrice + " DH";
+
+    priceEl.classList.add("bump");
+    setTimeout(() => priceEl.classList.remove("bump"), 300);
+  });
 });
 </script>
 
