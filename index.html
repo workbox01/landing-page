@@ -5,24 +5,22 @@
 <title>Order Page</title>
 
 <style>
-/* ===============================
-   THEME VARIABLES (EDIT HERE)
-   =============================== */
-   
+/* ==================================================
+   THEME SETTINGS (EDIT COLORS HERE)
+   ================================================== */
 :root {
-  --primary-color: #111111;
-  --secondary-color: #ffffff;
-  --accent-color: #e63946;
-  --background-color: #f4f4f4;
+  --primary-color: #111111;     /* Main button color */
+  --secondary-color: #ffffff;   /* Page background */
+  --accent-color: #e63946;      /* Accent / highlights */
+  --background-color: #f4f4f4;  /* Body background */
   --border-color: #dddddd;
-  --input-bg: #ffffff;
-  --button-disabled: #888888;
   --text-color: #222222;
+  --button-disabled: #888888;
 }
 
-/* ===============================
+/* ==================================================
    GLOBAL STYLES
-   =============================== */
+   ================================================== */
 * {
   box-sizing: border-box;
 }
@@ -34,26 +32,26 @@ body {
   color: var(--text-color);
 }
 
-/* ===============================
+/* ==================================================
    PAGE CONTAINER
-   =============================== */
+   ================================================== */
 .page {
   max-width: 500px;
   margin: auto;
   background: var(--secondary-color);
 }
 
-/* ===============================
+/* ==================================================
    HERO IMAGE
-   =============================== */
+   ================================================== */
 .hero img {
   width: 100%;
   display: block;
 }
 
-/* ===============================
+/* ==================================================
    SECTIONS
-   =============================== */
+   ================================================== */
 .section {
   padding: 16px;
   border-bottom: 1px solid var(--border-color);
@@ -62,20 +60,21 @@ body {
 .section-title {
   font-size: 18px;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
-/* ===============================
-   PRICE
-   =============================== */
+/* ==================================================
+   PRICE DISPLAY
+   ================================================== */
 .price-box {
   text-align: center;
   font-size: 22px;
   font-weight: bold;
 }
 
-/* ===============================
+/* ==================================================
    FORM ELEMENTS
-   =============================== */
+   ================================================== */
 label {
   display: block;
   margin-bottom: 6px;
@@ -89,7 +88,6 @@ select {
   padding: 12px;
   margin-bottom: 14px;
   border: 1px solid var(--border-color);
-  background: var(--input-bg);
   font-size: 16px;
 }
 
@@ -97,9 +95,9 @@ textarea {
   resize: vertical;
 }
 
-/* ===============================
-   BUTTON
-   =============================== */
+/* ==================================================
+   ORDER BUTTON
+   ================================================== */
 .order-button {
   width: 100%;
   padding: 16px;
@@ -121,20 +119,26 @@ textarea {
 
 <div class="page">
 
-  <!-- HERO / LONG IMAGE -->
+  <!-- ==================================================
+       HERO / LONG IMAGE
+       ================================================== -->
   <div class="hero">
-    <img src="product.jpg" alt="Product">
+    <img src="product.jpg" alt="Product Image">
   </div>
 
-  <!-- PRICE SECTION -->
+  <!-- ==================================================
+       PRICE SECTION
+       ================================================== -->
   <div class="section">
     <div class="section-title">Price</div>
     <div class="price-box">
-      <span id="price">200</span> DH
+      <span id="price">50</span> DH
     </div>
   </div>
 
-  <!-- QUANTITY SECTION -->
+  <!-- ==================================================
+       QUANTITY SECTION
+       ================================================== -->
   <div class="section">
     <div class="section-title">Quantity</div>
     <select id="quantity">
@@ -146,7 +150,9 @@ textarea {
     </select>
   </div>
 
-  <!-- CUSTOMER DETAILS -->
+  <!-- ==================================================
+       CUSTOMER DETAILS
+       ================================================== -->
   <div class="section">
     <div class="section-title">Your Details</div>
 
@@ -166,7 +172,9 @@ textarea {
     <textarea placeholder="Notes for delivery"></textarea>
   </div>
 
-  <!-- ORDER BUTTON -->
+  <!-- ==================================================
+       ORDER BUTTON
+       ================================================== -->
   <div class="section">
     <button class="order-button" disabled>
       ORDER NOW
@@ -174,6 +182,40 @@ textarea {
   </div>
 
 </div>
+
+<!-- ==================================================
+     JAVASCRIPT LOGIC
+     ================================================== -->
+<script>
+/* ==================================================
+   EDITABLE BUSINESS SETTINGS (SAFE TO EDIT)
+   ================================================== */
+
+// UNIT PRICE IN DH
+const UNIT_PRICE = 50;
+
+// MAX QUANTITY
+const MAX_QUANTITY = 5;
+
+/* ==================================================
+   PRICE CALCULATION LOGIC
+   ================================================== */
+
+const quantitySelect = document.getElementById("quantity");
+const priceDisplay = document.getElementById("price");
+
+// Set initial price
+priceDisplay.textContent = UNIT_PRICE;
+
+// Update price when quantity changes
+quantitySelect.addEventListener("change", function () {
+  const quantity = parseInt(this.value);
+
+  if (quantity >= 1 && quantity <= MAX_QUANTITY) {
+    priceDisplay.textContent = quantity * UNIT_PRICE;
+  }
+});
+</script>
 
 </body>
 </html>
