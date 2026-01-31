@@ -4,24 +4,25 @@
 <meta charset="UTF-8">
 <title>Order Now</title>
 
-<!-- GOOGLE FONT -->
+<!-- =======================
+     EDITABLE: FONT
+     ======================= -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==================================================
-   EDITABLE DESIGN SETTINGS
+   EDITABLE: GLOBAL DESIGN VARIABLES
    ================================================== */
 :root {
   --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   --card-bg: rgba(255,255,255,0.08);
   --accent: #00ffd5;
   --text-main: #ffffff;
-  --text-soft: #cccccc;
   --price-color: #00ffd5;
 }
 
 /* ==================================================
-   RESET & GLOBAL
+   RESET & BASE
    ================================================== */
 * {
   box-sizing: border-box;
@@ -43,7 +44,8 @@ body {
 .page {
   width: 100%;
   max-width: 480px;
-  animation: fadeIn 1s ease;
+  padding-bottom: 50px;
+  position: relative;
 }
 
 /* ==================================================
@@ -55,7 +57,7 @@ body {
 }
 
 /* ==================================================
-   GLASS CARD SECTIONS
+   CARD (SECTION CONTAINER)
    ================================================== */
 .card {
   background: var(--card-bg);
@@ -63,13 +65,7 @@ body {
   margin: 16px;
   padding: 18px;
   border-radius: 18px;
-  animation: slideUp 0.8s ease;
-  overflow: visible; /* ✅ FIX: allow dropdown to overflow */
-}
-
-.card h2 {
-  margin: 0 0 12px;
-  font-weight: 600;
+  position: relative;
 }
 
 /* ==================================================
@@ -80,7 +76,7 @@ body {
   font-weight: 700;
   color: var(--price-color);
   text-align: center;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .price.bump {
@@ -88,40 +84,49 @@ body {
 }
 
 /* ==================================================
-   QUANTITY DROPDOWN
+   EDITABLE: QUANTITY DROPDOWN (FIXED)
    ================================================== */
+
+/* IMPORTANT: this creates a TOP layer */
+.quantity-layer {
+  position: relative;
+  z-index: 9999;
+}
+
 .quantity-box {
   position: relative;
 }
 
 .quantity-selected {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.35);
   padding: 14px;
   border-radius: 12px;
   cursor: pointer;
   text-align: center;
 }
 
+/* THE POPUP ITSELF */
 .quantity-list {
   position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
   width: 100%;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.95);
   border-radius: 12px;
-  overflow: hidden;
-  margin-top: 8px;
   display: none;
-  animation: dropDown 0.3s ease;
-  z-index: 1000; /* ✅ FIX: keep dropdown above other cards */
+  overflow: hidden;
+
+  /* 🔥 THIS IS THE REAL FIX */
+  z-index: 10000;
 }
 
 .quantity-list div {
   padding: 12px;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
 .quantity-list div:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
 }
 
 /* ==================================================
@@ -141,7 +146,7 @@ textarea {
 }
 
 /* ==================================================
-   BUTTON
+   ORDER BUTTON
    ================================================== */
 button {
   width: 100%;
@@ -153,12 +158,11 @@ button {
   background: var(--accent);
   color: #000;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,255,213,0.4);
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* ==================================================
@@ -168,24 +172,6 @@ button:hover {
   width: 100%;
   margin-top: 20px;
 }
-
-/* ==================================================
-   ANIMATIONS
-   ================================================== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes dropDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 </style>
 </head>
 
@@ -193,35 +179,28 @@ button:hover {
 
 <div class="page">
 
-  <!-- HERO IMAGE -->
+  <!-- =======================
+       EDITABLE: HERO IMAGE
+       ======================= -->
   <div class="hero">
     <img src="product.jpg" alt="Product">
   </div>
 
-  <!-- PRICE -->
+  <!-- =======================
+       PRICE
+       ======================= -->
   <div class="card">
     <h2>Total Price</h2>
     <div id="price" class="price">50 DH</div>
   </div>
 
- 
-  <!-- FORM -->
-  <div class="card">
-    <h2>Your Details</h2>
-    <input placeholder="Full name">
-    <input placeholder="Phone number">
-    <input type="email" placeholder="Email (gmail)">
-    <textarea placeholder="Shipping address"></textarea>
-    <textarea placeholder="Remarks (optional)"></textarea>
-  </div>
-
-   <!-- QUANTITY -->
-  <div class="card">
+  <!-- =======================
+       QUANTITY (TOP LAYER)
+       ======================= -->
+  <div class="card quantity-layer">
     <h2>Quantity</h2>
     <div class="quantity-box">
-      <div id="quantitySelected" class="quantity-selected">
-        1 item
-      </div>
+      <div id="quantitySelected" class="quantity-selected">1 item</div>
       <div id="quantityList" class="quantity-list">
         <div data-q="1">1 item</div>
         <div data-q="2">2 items</div>
@@ -231,13 +210,29 @@ button:hover {
       </div>
     </div>
   </div>
- 
-  <!-- BUTTON -->
+
+  <!-- =======================
+       CUSTOMER DETAILS
+       ======================= -->
   <div class="card">
-    <button>ORDER NOW</button>
+    <h2>Your Details</h2>
+    <input id="fullName" placeholder="Full name">
+    <input id="phone" placeholder="Phone number">
+    <input id="email" type="email" placeholder="Email (gmail)">
+    <textarea id="address" placeholder="Shipping address"></textarea>
+    <textarea placeholder="Remarks (optional)"></textarea>
   </div>
 
-  <!-- FOOTER IMAGE -->
+  <!-- =======================
+       ORDER BUTTON
+       ======================= -->
+  <div class="card">
+    <button id="orderBtn" disabled>ORDER NOW</button>
+  </div>
+
+  <!-- =======================
+       FOOTER IMAGE
+       ======================= -->
   <div class="footer">
     <img src="footer.jpg" alt="End">
   </div>
@@ -246,7 +241,7 @@ button:hover {
 
 <script>
 /* ==================================================
-   EDITABLE BUSINESS SETTINGS
+   EDITABLE: BUSINESS SETTINGS
    ================================================== */
 const UNIT_PRICE = 50;
 
@@ -259,9 +254,15 @@ const quantityList = document.getElementById("quantityList");
 
 let currentQty = 1;
 
-quantitySelected.addEventListener("click", () => {
+quantitySelected.addEventListener("click", (e) => {
+  e.stopPropagation();
   quantityList.style.display =
     quantityList.style.display === "block" ? "none" : "block";
+});
+
+/* CLOSE WHEN CLICKING OUTSIDE */
+document.addEventListener("click", () => {
+  quantityList.style.display = "none";
 });
 
 quantityList.querySelectorAll("div").forEach(item => {
@@ -277,6 +278,28 @@ quantityList.querySelectorAll("div").forEach(item => {
     setTimeout(() => priceEl.classList.remove("bump"), 300);
   });
 });
+
+/* ==================================================
+   FORM VALIDATION (REQUIRED FIELDS)
+   ================================================== */
+const orderBtn = document.getElementById("orderBtn");
+const fullName = document.getElementById("fullName");
+const phone = document.getElementById("phone");
+const email = document.getElementById("email");
+const address = document.getElementById("address");
+
+function checkForm() {
+  orderBtn.disabled = !(
+    fullName.value.trim() &&
+    phone.value.trim() &&
+    email.value.trim() &&
+    address.value.trim()
+  );
+}
+
+[fullName, phone, email, address].forEach(el =>
+  el.addEventListener("input", checkForm)
+);
 </script>
 
 </body>
