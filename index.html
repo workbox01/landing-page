@@ -3,675 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modern Product Landing</title>
+<title>Product Landing Page</title>
 
-<!-- GOOGLE FONT -->
+<!-- ===================== EDIT: FONT ===================== -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 /* =====================================================
-   🎨 EDITABLE THEME SETTINGS (CHANGE COLORS HERE)
+   🎨 EDIT: GLOBAL THEME (COLORS & FONT)
    ===================================================== */
-:root {
-  --primary: #7a3cff;
-  --dark: #0b0b0f;
-  --light: #ffffff;
-  --soft: #b9b9c9;
+:root{
+  --purple:#7a3cff;
+  --black:#0b0b0f;
+  --white:#ffffff;
+  --soft:#b8b8c7;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--black);
+  color:var(--white);
+  overflow-x:hidden;
 }
 
 /* =====================================================
-   🔄 RESET
+   🔝 NAVBAR (DESKTOP + MOBILE)
    ===================================================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:16px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(10px);
+  z-index:1000;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--dark);
-  color: var(--light);
-  overflow-x: hidden;
+/* EDIT: BRAND NAME */
+.logo{
+  font-size:20px;
+  font-weight:700;
+  color:var(--purple);
+}
+
+/* DESKTOP MENU */
+.nav-links{
+  display:flex;
+  gap:24px;
+}
+.nav-links a{
+  text-decoration:none;
+  color:var(--soft);
+}
+.nav-links a:hover{color:var(--white)}
+
+/* MOBILE MENU BUTTON */
+#menuBtn{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
 }
 
 /* =====================================================
-   🔝 TOP NAVBAR
+   📱 MOBILE DROPDOWN MENU (CORNER, NOT FULL SCREEN)
    ===================================================== */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(12px);
-  padding: 14px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+#mobileMenu{
+  position:fixed;
+  top:70px;
+  right:20px;
+  width:220px;
+  background:#111;
+  border-radius:18px;
+  padding:20px;
+  display:none;
+  flex-direction:column;
+  gap:14px;
+  box-shadow:0 20px 50px rgba(122,60,255,.35);
+  animation:menuIn .35s ease;
+  z-index:999;
 }
 
-nav .logo {
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--primary);
+#mobileMenu a{
+  color:white;
+  text-decoration:none;
+  font-size:16px;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 24px;
+#mobileMenu a:hover{
+  color:var(--purple);
 }
 
-nav ul li {
-  cursor: pointer;
-  color: var(--soft);
-  transition: color 0.3s;
+@keyframes menuIn{
+  from{opacity:0;transform:translateY(-10px) scale(.95)}
+  to{opacity:1;transform:none}
 }
 
-nav ul li:hover {
-  color: var(--light);
+@media(max-width:768px){
+  .nav-links{display:none}
+  #menuBtn{display:block}
 }
 
 /* =====================================================
    🦸 HERO SECTION
    ===================================================== */
-.hero {
-  min-height: 100vh;
+.hero{
+  min-height:100vh;
+  padding:120px 32px;
+  display:flex;
+  align-items:center;
   background:
-    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
     url("https://images.unsplash.com/photo-1612817288484-6f916006741a");
-    /* REPLACE IMAGE: hero background */
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  padding: 120px 40px;
+  /* EDIT: HERO IMAGE */
+  background-size:cover;
+  background-position:center;
 }
 
-.hero-content {
-  max-width: 600px;
-  animation: fadeUp 1.2s ease;
+.hero-content{
+  max-width:600px;
+  animation:fadeUp 1s ease;
 }
 
-.hero h1 {
-  font-size: 48px;
-  line-height: 1.2;
-}
+/* EDIT: HERO TEXT */
+.hero h1{font-size:48px;line-height:1.2}
+.hero p{margin-top:18px;color:var(--soft)}
 
-.hero p {
-  margin-top: 20px;
-  color: var(--soft);
-}
-
-.hero button {
-  margin-top: 30px;
-  padding: 16px 36px;
-  background: var(--primary);
-  border: none;
-  border-radius: 40px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.hero button:hover {
-  transform: scale(1.05);
+.hero button{
+  margin-top:28px;
+  padding:16px 40px;
+  border:none;
+  border-radius:40px;
+  background:var(--purple);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
 /* =====================================================
    🖼 IMAGE SLIDER
    ===================================================== */
-.slider {
-  padding: 80px 0;
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+.slider{
+  padding:80px 32px;
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
 }
 
-.slider img {
-  min-width: 300px;
-  height: 380px;
-  object-fit: cover;
-  border-radius: 20px;
-  scroll-snap-align: center;
-  transition: transform 0.4s;
+.slider img{
+  min-width:300px;
+  height:380px;
+  object-fit:cover;
+  border-radius:20px;
+  scroll-snap-align:center;
+  transition:transform .4s;
 }
 
-.slider img:hover {
-  transform: scale(1.05);
-}
+/* EDIT: SLIDE IMAGES */
+.slider img:hover{transform:scale(1.05)}
 
 /* =====================================================
    ℹ INFO SECTIONS
    ===================================================== */
-.section {
-  padding: 80px 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-  gap: 40px;
-  align-items: center;
+.section{
+  padding:80px 32px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:40px;
+  align-items:center;
 }
 
-.section img {
-  width: 100%;
-  border-radius: 24px;
+.section img{
+  width:100%;
+  border-radius:24px;
 }
 
-.section h2 {
-  font-size: 32px;
-}
-
-.section p {
-  margin-top: 16px;
-  color: var(--soft);
-}
+/* EDIT: SECTION TEXT */
+.section h2{font-size:32px}
+.section p{margin-top:14px;color:var(--soft)}
 
 /* =====================================================
-   🛒 CALL TO ACTION
+   🛒 ORDER SECTION (LOGIC LATER)
    ===================================================== */
-.cta {
-  padding: 80px 40px;
-  text-align: center;
-  background: linear-gradient(135deg, #1a1a2e, #0b0b0f);
+.order{
+  padding:80px 32px;
+  background:linear-gradient(135deg,#151522,#0b0b0f);
+  text-align:center;
 }
 
-.cta h2 {
-  font-size: 36px;
-}
-
-.cta button {
-  margin-top: 30px;
-  padding: 18px 48px;
-  background: var(--primary);
-  border: none;
-  border-radius: 50px;
-  font-size: 18px;
-  cursor: pointer;
-}
+.order h2{font-size:36px;margin-bottom:20px}
 
 /* =====================================================
    ✨ ANIMATIONS
    ===================================================== */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:none}
 }
-   /* ===================== MODERN MOBILE MENU ===================== */
-
-#menuBtn{
-  display:none;
-  font-size:28px;
-  cursor:pointer;
-  color:#fff;
-  transition:transform .3s ease;
-}
-
-/* Overlay */
-#mobileMenuOverlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(10px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-/* Menu Box */
-#mobileMenuBox{
-  background:rgba(20,20,30,.9);
-  border-radius:24px;
-  padding:40px 50px;
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-  transform:scale(.8) translateY(20px);
-  opacity:0;
-  transition:all .4s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 30px 80px rgba(122,60,255,.35);
-}
-
-/* Active animation */
-#mobileMenuOverlay.active #mobileMenuBox{
-  transform:scale(1) translateY(0);
-  opacity:1;
-}
-
-#mobileMenuBox a{
-  color:white;
-  text-decoration:none;
-  font-size:20px;
-  text-align:center;
-  position:relative;
-}
-
-/* Purple glow hover */
-#mobileMenuBox a::after{
-  content:"";
-  position:absolute;
-  bottom:-6px;
-  left:50%;
-  width:0;
-  height:2px;
-  background:#7a3cff;
-  transition:.3s;
-  transform:translateX(-50%);
-}
-
-#mobileMenuBox a:hover::after{
-  width:50%;
-}
-
-/* Responsive */
-@media(max-width:768px){
-  .desktop-menu{display:none;}
-  #menuBtn{display:block;}
-}
-
-
-/* ===================== RESPONSIVE ===================== */
-@media (max-width:768px){
-  .desktop-menu{
-    display:none;
-  }
-  #menuBtn{
-    display:block;
-  }
-}
-
 
 </style>
 </head>
 
 <body>
 
-<!-- ===================== NAVBAR ===================== -->
+<!-- ===================== NAV ===================== -->
 <nav>
   <div class="logo">BrandName</div>
 
-  <!-- DESKTOP MENU -->
-  <ul class="desktop-menu">
-    <li>Home</li>
-    <li>About</li>
-    <li>Socials</li>
-  </ul>
+  <!-- EDIT: DESKTOP MENU -->
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Socials</a>
+  </div>
 
-  <!-- MOBILE MENU BUTTON -->
+  <!-- MOBILE MENU ICON -->
   <div id="menuBtn">☰</div>
 </nav>
-   
-<!-- ===================== MODERN MOBILE MENU ===================== -->
-<div id="mobileMenuOverlay">
-  <div id="mobileMenuBox">
-    <a href="#">Home</a>
-    <a href="#">About Us</a>
-    <a href="#">Instagram</a>
-    <a href="#">Facebook</a>
-  </div>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu">
+  <!-- EDIT: MOBILE MENU LINKS -->
+  <a href="#">Home</a>
+  <a href="#">About Us</a>
+  <a href="#">Instagram</a>
+  <a href="#">Facebook</a>
 </div>
-
-
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
   <div class="hero-content">
-    <h1>Premium Home Solution</h1>
-    <p>Modern, elegant, and designed for everyday comfort.</p>
+    <h1>Premium Home Product</h1>
+    <p>Modern design. Smart comfort. Built for your lifestyle.</p>
     <button>Order Now</button>
   </div>
 </section>
 
 <!-- ===================== SLIDER ===================== -->
 <section class="slider">
-  <img src="https://images.unsplash.com/photo-1582582429416-5d6d9a6b67b8" alt="">
-  <!-- REPLACE IMAGE: slide 1 -->
-
-  <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed" alt="">
-  <!-- REPLACE IMAGE: slide 2 -->
-
-  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="">
-  <!-- REPLACE IMAGE: slide 3 -->
-
-  <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf" alt="">
-  <!-- REPLACE IMAGE: slide 4 -->
+  <!-- EDIT: SLIDE IMAGES -->
+  <img src="https://images.unsplash.com/photo-1582582429416-5d6d9a6b67b8">
+  <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed">
+  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
 </section>
 
 <!-- ===================== INFO 1 ===================== -->
 <section class="section">
+  <!-- EDIT: IMAGE -->
   <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
-  <!-- REPLACE IMAGE: info section 1 -->
   <div>
     <h2>Designed for Modern Living</h2>
-    <p>Clean design, durable materials, and premium finish.</p>
+    <p>High quality materials with a clean and elegant finish.</p>
   </div>
 </section>
 
 <!-- ===================== INFO 2 ===================== -->
 <section class="section">
   <div>
-    <h2>Easy Installation</h2>
-    <p>Simple setup that fits any home environment.</p>
+    <h2>Easy to Use</h2>
+    <p>Simple setup that fits perfectly in any home.</p>
   </div>
+  <!-- EDIT: IMAGE -->
   <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c">
-  <!-- REPLACE IMAGE: info section 2 -->
 </section>
 
-<!-- ===================== CTA ===================== -->
-<section class="cta">
-  <h2>Ready to Upgrade Your Home?</h2>
-  <button>Order Now</button>
+<!-- ===================== ORDER ===================== -->
+<section class="order">
+  <h2>Ready to Order?</h2>
+  <p>Fast delivery. Secure process.</p>
 </section>
 
-   <!-- ===================== ORDER SECTION ===================== -->
-<section id="order" class="cta">
-
-  <h2>Complete Your Order</h2>
-
-  <!-- ===== PRICE DISPLAY ===== -->
-  <div id="finalPrice" style="font-size:40px;font-weight:700;color:#7a3cff;margin:20px 0;">
-    50 DH
-  </div>
-
-  <!-- ===== QUANTITY SELECTOR ===== -->
-  <div style="max-width:300px;margin:0 auto 30px;position:relative;z-index:50;">
-
-    <div id="qtySelected"
-      style="background:#111;padding:14px;border-radius:14px;cursor:pointer;">
-      Quantity: 1
-    </div>
-
-    <div id="qtyList"
-      style="display:none;position:absolute;top:60px;width:100%;background:#000;border-radius:14px;overflow:hidden;">
-      <!-- EDIT: MAX QUANTITY -->
-      <div data-q="1">1 item</div>
-      <div data-q="2">2 items</div>
-      <div data-q="3">3 items</div>
-      <div data-q="4">4 items</div>
-      <div data-q="5">5 items</div>
-    </div>
-
-  </div>
-
-  <!-- ===== ORDER FORM ===== -->
-  <form id="orderForm" style="max-width:420px;margin:0 auto;">
-
-    <!-- EDIT: FORM FIELDS -->
-    <input required placeholder="Full Name" class="finput">
-    <input required placeholder="Phone (06XXXXXXXX)" pattern="0[67][0-9]{8}" class="finput">
-    <input required type="email" placeholder="Email" class="finput">
-    <textarea required placeholder="Shipping Address" class="finput"></textarea>
-    <textarea placeholder="Remarks (optional)" class="finput"></textarea>
-
-    <button id="orderBtn" disabled
-      style="margin-top:20px;padding:18px;width:100%;border:none;border-radius:50px;
-      background:#7a3cff;color:#fff;font-size:18px;opacity:.4;cursor:not-allowed;">
-      PLACE ORDER
-    </button>
-
-  </form>
-</section>
-
-<style>
-/* ===== FORM INPUT STYLE ===== */
-.finput {
-  width:100%;
-  padding:14px;
-  margin-bottom:14px;
-  border-radius:14px;
-  border:none;
-  font-family:Poppins;
-}
-#qtyList div {
-  padding:12px;
-  cursor:pointer;
-}
-#qtyList div:hover {
-  background:#7a3cff;
-}
-</style>
-
+<!-- ===================== MENU SCRIPT ===================== -->
 <script>
-/* =====================================================
-   ⚙️ EDITABLE SETTINGS
-   ===================================================== */
-const UNIT_PRICE = 50; // EDIT: UNIT PRICE
+/* MOBILE MENU TOGGLE */
+const menuBtn=document.getElementById("menuBtn");
+const mobileMenu=document.getElementById("mobileMenu");
 
-/* =====================================================
-   💰 PRICE + QUANTITY LOGIC
-   ===================================================== */
-let qty = 1;
-const priceEl = document.getElementById("finalPrice");
-const qtySelected = document.getElementById("qtySelected");
-const qtyList = document.getElementById("qtyList");
-
-qtySelected.onclick = () => {
-  qtyList.style.display = qtyList.style.display === "block" ? "none" : "block";
+menuBtn.onclick=()=>{
+  mobileMenu.style.display=
+    mobileMenu.style.display==="flex"?"none":"flex";
 };
 
-qtyList.querySelectorAll("div").forEach(item => {
-  item.onclick = () => {
-    qty = item.dataset.q;
-    qtySelected.innerText = "Quantity: " + qty;
-    qtyList.style.display = "none";
-    priceEl.innerText = (qty * UNIT_PRICE) + " DH";
-  };
-});
-
-/* =====================================================
-   ✅ FORM VALIDATION
-   ===================================================== */
-const form = document.getElementById("orderForm");
-const btn = document.getElementById("orderBtn");
-
-form.addEventListener("input", () => {
-  btn.disabled = !form.checkValidity();
-  btn.style.opacity = btn.disabled ? ".4" : "1";
-  btn.style.cursor = btn.disabled ? "not-allowed" : "pointer";
-});
-</script>
-
-   <!-- ===================== BASKET FLOAT BUTTON ===================== -->
-<div id="basketBtn">🧺</div>
-
-<style>
-/* EDIT: BASKET BUTTON */
-#basketBtn{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:#7a3cff;
-  color:#fff;
-  font-size:26px;
-  display: none; /* ✅ BASKET DISABLED */;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:9999;
-  box-shadow:0 10px 30px rgba(122,60,255,.5);
-}
-</style>
-<!-- ===================== BASKET POPUP ===================== -->
-<div id="basketOverlay">
-  <div id="basketBox">
-
-    <h3>Your Basket</h3>
-
-    <!-- PRODUCT LINE -->
-    <div class="basketRow">
-      <span>Product</span>
-      <div class="qtyControl">
-        <button onclick="changeQty(-1)">−</button>
-        <span id="basketQty">1</span>
-        <button onclick="changeQty(1)">+</button>
-      </div>
-    </div>
-
-    <!-- TOTAL -->
-    <div class="basketTotal">
-      Total: <span id="basketTotal">50</span> DH
-    </div>
-
-    <!-- FINISH -->
-    <button id="finishOrderBtn">FINISH ORDER</button>
-
-  </div>
-</div>
-
-<style>
-/* ===================== BASKET POPUP STYLE ===================== */
-#basketOverlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9998;
-}
-
-#basketBox{
-  background:#0b0b0f;
-  border-radius:20px;
-  padding:30px;
-  width:90%;
-  max-width:400px;
-  animation:fadeUp .4s ease;
-}
-
-.basketRow{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:20px 0;
-}
-
-.qtyControl{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.qtyControl button{
-  width:32px;
-  height:32px;
-  border:none;
-  border-radius:50%;
-  background:#7a3cff;
-  color:#fff;
-  cursor:pointer;
-}
-
-.basketTotal{
-  font-size:22px;
-  margin:20px 0;
-}
-
-#finishOrderBtn{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:40px;
-  background:#7a3cff;
-  color:#fff;
-  font-size:18px;
-  cursor:pointer;
-}
-</style>
- <script>
-/* ===================== MODERN MOBILE MENU LOGIC ===================== */
-const menuBtn = document.getElementById("menuBtn");
-const overlay = document.getElementById("mobileMenuOverlay");
-
-let menuOpen = false;
-
-menuBtn.onclick = () => {
-  menuOpen = !menuOpen;
-  overlay.style.display = "flex";
-  setTimeout(()=>overlay.classList.toggle("active",menuOpen),10);
-  menuBtn.style.transform = menuOpen ? "rotate(90deg)" : "rotate(0deg)";
-};
-
-overlay.onclick = e => {
-  if(e.target === overlay){
-    overlay.classList.remove("active");
-    menuBtn.style.transform = "rotate(0deg)";
-    setTimeout(()=>overlay.style.display="none",300);
-    menuOpen = false;
-  }
-};
-</script>
-
-<script>
-/* =====================================================
-   🧺 BASKET LOGIC (CONNECTED TO STEP 2)
-   ===================================================== */
-
-const basketBtn = document.getElementById("basketBtn");
-const basketOverlay = document.getElementById("basketOverlay");
-const basketQtyEl = document.getElementById("basketQty");
-const basketTotalEl = document.getElementById("basketTotal");
-
-/* EDIT: must match STEP 2 */
-const MAX_QTY = 5;
-
-/* OPEN / CLOSE */
-basketBtn.onclick = () => basketOverlay.style.display = "flex";
-basketOverlay.onclick = e => {
-  if(e.target === basketOverlay) basketOverlay.style.display = "none";
-};
-
-/* SYNC FROM STEP 2 */
-function syncBasket(){
-  basketQtyEl.innerText = qty;
-  basketTotalEl.innerText = qty * UNIT_PRICE;
-}
-syncBasket();
-
-/* CHANGE QTY INSIDE BASKET */
-function changeQty(val){
-  qty += val;
-  if(qty < 1) qty = 1;
-  if(qty > MAX_QTY) qty = MAX_QTY;
-
-  // update everywhere
-  document.getElementById("qtySelected").innerText = "Quantity: " + qty;
-  document.getElementById("finalPrice").innerText = (qty * UNIT_PRICE) + " DH";
-  syncBasket();
-}
-
-/* FINISH ORDER ACTION (FOR LATER N8N) */
-document.getElementById("finishOrderBtn").onclick = () => {
-  basketOverlay.style.display = "none";
-  document.getElementById("order").scrollIntoView({behavior:"smooth"});
-};
-</script>
-<script>
-/* ===================== MOBILE MENU LOGIC ===================== */
-const menuBtn = document.getElementById("menuBtn");
-const mobileMenu = document.getElementById("mobileMenu");
-
-menuBtn.onclick = () => {
-  mobileMenu.style.display =
-    mobileMenu.style.display === "flex" ? "none" : "flex";
-};
-
-/* close when clicking outside */
-document.addEventListener("click", e => {
-  if(!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)){
-    mobileMenu.style.display = "none";
+document.addEventListener("click",e=>{
+  if(!menuBtn.contains(e.target)&&!mobileMenu.contains(e.target)){
+    mobileMenu.style.display="none";
   }
 });
 </script>
