@@ -1,316 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Order Now</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Product Landing</title>
 
-<!-- =======================
-     EDITABLE: FONT
-     ======================= -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- =========================
+       MARKER: GLOBAL STYLES
+  ========================== -->
+  <style>
+    :root {
+      --purple: #7b3fe4;
+      --black: #0b0b0b;
+      --white: #ffffff;
+      --gray: #b5b5b5;
+    }
 
-<style>
-/* ==================================================
-   EDITABLE: GLOBAL DESIGN VARIABLES
-   ================================================== */
-:root {
-  --card-bg: rgba(255,255,255,0.08);
-  --accent: #00ffd5;
-  --text-main: #ffffff;
-  --price-color: #00ffd5;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", system-ui, sans-serif;
+    }
 
-/* ==================================================
-   RESET & BASE
-   ================================================== */
-* {
-  box-sizing: border-box;
-}
+    body {
+      background: linear-gradient(180deg, #0b0b0b, #120820);
+      color: var(--white);
+      overflow-x: hidden;
+    }
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-  /* =======================
-     EDITABLE: BACKGROUND IMAGE
-     ======================= */
-  background-image: url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-  color: var(--text-main);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-}
-
-/* Optional dark overlay for readability */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: -1;
-}
-
-/* ==================================================
-   PAGE WRAPPER
-   ================================================== */
-.page {
-  width: 100%;
-  max-width: 480px;
-  padding-bottom: 50px;
-  position: relative;
-}
-
-/* ==================================================
-   HERO IMAGE
-   ================================================== */
-.hero img {
-  width: 100%;
-  display: block;
-}
-
-/* ==================================================
-   CARD (SECTION CONTAINER)
-   ================================================== */
-.card {
-  background: var(--card-bg);
-  backdrop-filter: blur(14px);
-  margin: 16px;
-  padding: 18px;
-  border-radius: 18px;
-  position: relative;
-}
-
-/* ==================================================
-   PRICE DISPLAY
-   ================================================== */
-.price {
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--price-color);
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.price.bump {
-  transform: scale(1.15);
-}
-
-/* ==================================================
-   QUANTITY DROPDOWN (TOP LAYER)
-   ================================================== */
-.quantity-layer {
-  position: relative;
-  z-index: 9999;
-}
-
-.quantity-box {
-  position: relative;
-}
-
-.quantity-selected {
-  background: rgba(0,0,0,0.4);
-  padding: 14px;
-  border-radius: 12px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.quantity-list {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.95);
-  border-radius: 12px;
-  display: none;
-  overflow: hidden;
-  z-index: 10000;
-}
-
-.quantity-list div {
-  padding: 12px;
-  cursor: pointer;
-}
-
-.quantity-list div:hover {
-  background: rgba(255,255,255,0.15);
-}
-
-/* ==================================================
-   FORM
-   ================================================== */
-input, textarea {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 14px;
-  border-radius: 12px;
-  border: none;
-  font-family: 'Poppins', sans-serif;
-}
-
-textarea {
-  resize: vertical;
-}
-
-/* ==================================================
-   ORDER BUTTON
-   ================================================== */
-button {
-  width: 100%;
-  padding: 16px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 14px;
-  border: none;
-  background: var(--accent);
-  color: #000;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* ==================================================
-   FOOTER IMAGE
-   ================================================== */
-.footer img {
-  width: 100%;
-  margin-top: 20px;
-}
-</style>
+    section {
+      padding: 80px 8%;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="page">
+<!-- =========================
+     MARKER: TOP NAVBAR
+========================== -->
+<header class="navbar">
+  <div class="logo">PURPLE<span>X</span></div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Features</a>
+    <a href="#">Gallery</a>
+    <a href="#">Order</a>
+  </nav>
+</header>
 
-  <!-- =======================
-       HERO IMAGE
-       ======================= -->
-  <div class="hero">
-    <img src="product.jpg" alt="Product">
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    z-index: 1000;
+  }
+
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .logo span {
+    color: var(--purple);
+  }
+
+  nav a {
+    margin-left: 30px;
+    font-size: 15px;
+    color: var(--gray);
+    transition: 0.3s;
+  }
+
+  nav a:hover {
+    color: var(--white);
+  }
+</style>
+
+<!-- =========================
+     MARKER: HERO SECTION
+========================== -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Upgrade Your Home Experience</h1>
+    <p>Modern design. Smart usability. Premium quality.</p>
+    <button class="cta">Order Now</button>
   </div>
 
-  <!-- =======================
-       PRICE
-       ======================= -->
-  <div class="card">
-    <h2>Total Price</h2>
-    <div id="price" class="price">50 DH</div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1582582429416-5c1d5b25c7ad" alt="Product">
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding-top: 120px;
+  }
+
+  .hero-text h1 {
+    font-size: 52px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .hero-text p {
+    color: var(--gray);
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .cta {
+    background: linear-gradient(135deg, var(--purple), #a57cff);
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(123,63,228,0.4);
+  }
+
+  .hero-image img {
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+</style>
+
+<!-- =========================
+     MARKER: IMAGE SLIDER
+========================== -->
+<section class="slider-section">
+  <h2>Product Gallery</h2>
+
+  <div class="slider">
+    <img class="active" src="https://images.unsplash.com/photo-1606813909355-c1a0c1c8e2db">
+    <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c">
+    <img src="https://images.unsplash.com/photo-1601972599720-6f1f1e2f4b57">
+  </div>
+</section>
+
+<style>
+  .slider-section h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+
+  .slider {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .slider img {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+    border-radius: 25px;
+  }
+
+  .slider img.active {
+    opacity: 1;
+    position: relative;
+  }
+</style>
+
+<!-- =========================
+     MARKER: FEATURES SECTION
+========================== -->
+<section class="features">
+  <div class="feature">
+    <h3>Premium Materials</h3>
+    <p>Built with durability and elegance in mind.</p>
   </div>
 
-  <!-- =======================
-       QUANTITY
-       ======================= -->
-  <div class="card quantity-layer">
-    <h2>Quantity</h2>
-    <div class="quantity-box">
-      <div id="quantitySelected" class="quantity-selected">1 item</div>
-      <div id="quantityList" class="quantity-list">
-        <div data-q="1">1 item</div>
-        <div data-q="2">2 items</div>
-        <div data-q="3">3 items</div>
-        <div data-q="4">4 items</div>
-        <div data-q="5">5 items</div>
-      </div>
-    </div>
+  <div class="feature">
+    <h3>Modern Design</h3>
+    <p>Minimalist look that fits every home.</p>
   </div>
 
-  <!-- =======================
-       CUSTOMER DETAILS
-       ======================= -->
-  <div class="card">
-    <h2>Your Details</h2>
-    <input id="fullName" placeholder="Full name">
-    <input id="phone" placeholder="Phone number">
-    <input id="email" type="email" placeholder="Email (gmail)">
-    <textarea id="address" placeholder="Shipping address"></textarea>
-    <textarea placeholder="Remarks (optional)"></textarea>
+  <div class="feature">
+    <h3>Easy Installation</h3>
+    <p>No tools. No stress. Plug & use.</p>
   </div>
+</section>
 
-  <!-- =======================
-       ORDER BUTTON
-       ======================= -->
-  <div class="card">
-    <button id="orderBtn" disabled>ORDER NOW</button>
-  </div>
+<style>
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
 
-  <!-- =======================
-       FOOTER IMAGE
-       ======================= -->
-  <div class="footer">
-    <img src="footer.jpg" alt="End">
-  </div>
+  .feature {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 40px;
+    border-radius: 25px;
+    transition: transform 0.3s, border 0.3s;
+  }
 
-</div>
+  .feature:hover {
+    transform: translateY(-8px);
+    border-color: var(--purple);
+  }
 
+  .feature h3 {
+    margin-bottom: 15px;
+  }
+
+  .feature p {
+    color: var(--gray);
+  }
+</style>
+
+<!-- =========================
+     MARKER: FOOTER
+========================== -->
+<footer class="footer">
+  <p>© 2026 PurpleX. All rights reserved.</p>
+</footer>
+
+<style>
+  .footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray);
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+</style>
+
+<!-- =========================
+     MARKER: JAVASCRIPT
+========================== -->
 <script>
-/* ==================================================
-   EDITABLE: BUSINESS SETTINGS
-   ================================================== */
-const UNIT_PRICE = 50;
+  // Image slider automation
+  const slides = document.querySelectorAll(".slider img");
+  let index = 0;
 
-/* ==================================================
-   PRICE & QUANTITY LOGIC
-   ================================================== */
-const priceEl = document.getElementById("price");
-const quantitySelected = document.getElementById("quantitySelected");
-const quantityList = document.getElementById("quantityList");
-
-let currentQty = 1;
-
-quantitySelected.addEventListener("click", (e) => {
-  e.stopPropagation();
-  quantityList.style.display =
-    quantityList.style.display === "block" ? "none" : "block";
-});
-
-document.addEventListener("click", () => {
-  quantityList.style.display = "none";
-});
-
-quantityList.querySelectorAll("div").forEach(item => {
-  item.addEventListener("click", () => {
-    currentQty = parseInt(item.dataset.q);
-    quantitySelected.textContent = item.textContent;
-    quantityList.style.display = "none";
-
-    const newPrice = currentQty * UNIT_PRICE;
-    priceEl.textContent = newPrice + " DH";
-
-    priceEl.classList.add("bump");
-    setTimeout(() => priceEl.classList.remove("bump"), 300);
-  });
-});
-
-/* ==================================================
-   FORM VALIDATION
-   ================================================== */
-const orderBtn = document.getElementById("orderBtn");
-const fullName = document.getElementById("fullName");
-const phone = document.getElementById("phone");
-const email = document.getElementById("email");
-const address = document.getElementById("address");
-
-function checkForm() {
-  orderBtn.disabled = !(
-    fullName.value.trim() &&
-    phone.value.trim() &&
-    email.value.trim() &&
-    address.value.trim()
-  );
-}
-
-[fullName, phone, email, address].forEach(el =>
-  el.addEventListener("input", checkForm)
-);
+  setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+  }, 3000);
 </script>
 
 </body>
