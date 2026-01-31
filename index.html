@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order Now</title>
 
 <!-- =======================
@@ -11,20 +12,24 @@
 
 <style>
 /* ==================================================
-   EDITABLE: GLOBAL DESIGN VARIABLES
+   EDITABLE: GLOBAL SETTINGS
    ================================================== */
 :root {
-  --card-bg: rgba(255,255,255,0.08);
   --accent: #00ffd5;
   --text-main: #ffffff;
   --price-color: #00ffd5;
+  --card-bg: rgba(255,255,255,0.10);
 }
 
 /* ==================================================
-   RESET & BASE
+   RESET
    ================================================== */
 * {
   box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
 }
 
 body {
@@ -38,15 +43,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 
   color: var(--text-main);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
 }
 
-/* Optional dark overlay for readability */
+/* Dark overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -56,13 +57,15 @@ body::before {
 }
 
 /* ==================================================
-   PAGE WRAPPER
+   FULL SCREEN MOBILE WRAPPER
    ================================================== */
 .page {
+  min-height: 100vh;
   width: 100%;
   max-width: 480px;
-  padding-bottom: 50px;
-  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ==================================================
@@ -74,71 +77,24 @@ body::before {
 }
 
 /* ==================================================
-   CARD (SECTION CONTAINER)
+   CARD (SECTIONS)
    ================================================== */
 .card {
   background: var(--card-bg);
   backdrop-filter: blur(14px);
-  margin: 16px;
+  margin: 12px;
   padding: 18px;
   border-radius: 18px;
-  position: relative;
 }
 
 /* ==================================================
-   PRICE DISPLAY
+   PRICE
    ================================================== */
 .price {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
   color: var(--price-color);
   text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.price.bump {
-  transform: scale(1.15);
-}
-
-/* ==================================================
-   QUANTITY DROPDOWN (TOP LAYER)
-   ================================================== */
-.quantity-layer {
-  position: relative;
-  z-index: 9999;
-}
-
-.quantity-box {
-  position: relative;
-}
-
-.quantity-selected {
-  background: rgba(0,0,0,0.4);
-  padding: 14px;
-  border-radius: 12px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.quantity-list {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.95);
-  border-radius: 12px;
-  display: none;
-  overflow: hidden;
-  z-index: 10000;
-}
-
-.quantity-list div {
-  padding: 12px;
-  cursor: pointer;
-}
-
-.quantity-list div:hover {
-  background: rgba(255,255,255,0.15);
 }
 
 /* ==================================================
@@ -158,11 +114,11 @@ textarea {
 }
 
 /* ==================================================
-   ORDER BUTTON
+   BUTTON
    ================================================== */
 button {
   width: 100%;
-  padding: 16px;
+  padding: 18px;
   font-size: 18px;
   font-weight: 600;
   border-radius: 14px;
@@ -182,7 +138,7 @@ button:disabled {
    ================================================== */
 .footer img {
   width: 100%;
-  margin-top: 20px;
+  margin-top: auto;
 }
 </style>
 </head>
@@ -192,34 +148,20 @@ button:disabled {
 <div class="page">
 
   <!-- =======================
-       HERO IMAGE
+       EDITABLE: HERO IMAGE
        ======================= -->
   <div class="hero">
     <img src="product.jpg" alt="Product">
   </div>
 
   <!-- =======================
-       PRICE
+       PRICE (SINGLE ITEM)
        ======================= -->
   <div class="card">
     <h2>Total Price</h2>
-    <div id="price" class="price">50 DH</div>
-  </div>
-
-  <!-- =======================
-       QUANTITY
-       ======================= -->
-  <div class="card quantity-layer">
-    <h2>Quantity</h2>
-    <div class="quantity-box">
-      <div id="quantitySelected" class="quantity-selected">1 item</div>
-      <div id="quantityList" class="quantity-list">
-        <div data-q="1">1 item</div>
-        <div data-q="2">2 items</div>
-        <div data-q="3">3 items</div>
-        <div data-q="4">4 items</div>
-        <div data-q="5">5 items</div>
-      </div>
+    <div class="price">
+      <!-- EDIT PRICE HERE -->
+      50 DH
     </div>
   </div>
 
@@ -228,10 +170,14 @@ button:disabled {
        ======================= -->
   <div class="card">
     <h2>Your Details</h2>
+
+    <!-- REQUIRED -->
     <input id="fullName" placeholder="Full name">
     <input id="phone" placeholder="Phone number">
     <input id="email" type="email" placeholder="Email (gmail)">
     <textarea id="address" placeholder="Shipping address"></textarea>
+
+    <!-- OPTIONAL -->
     <textarea placeholder="Remarks (optional)"></textarea>
   </div>
 
@@ -253,45 +199,7 @@ button:disabled {
 
 <script>
 /* ==================================================
-   EDITABLE: BUSINESS SETTINGS
-   ================================================== */
-const UNIT_PRICE = 50;
-
-/* ==================================================
-   PRICE & QUANTITY LOGIC
-   ================================================== */
-const priceEl = document.getElementById("price");
-const quantitySelected = document.getElementById("quantitySelected");
-const quantityList = document.getElementById("quantityList");
-
-let currentQty = 1;
-
-quantitySelected.addEventListener("click", (e) => {
-  e.stopPropagation();
-  quantityList.style.display =
-    quantityList.style.display === "block" ? "none" : "block";
-});
-
-document.addEventListener("click", () => {
-  quantityList.style.display = "none";
-});
-
-quantityList.querySelectorAll("div").forEach(item => {
-  item.addEventListener("click", () => {
-    currentQty = parseInt(item.dataset.q);
-    quantitySelected.textContent = item.textContent;
-    quantityList.style.display = "none";
-
-    const newPrice = currentQty * UNIT_PRICE;
-    priceEl.textContent = newPrice + " DH";
-
-    priceEl.classList.add("bump");
-    setTimeout(() => priceEl.classList.remove("bump"), 300);
-  });
-});
-
-/* ==================================================
-   FORM VALIDATION
+   FORM VALIDATION (REQUIRED FIELDS)
    ================================================== */
 const orderBtn = document.getElementById("orderBtn");
 const fullName = document.getElementById("fullName");
@@ -315,3 +223,4 @@ function checkForm() {
 
 </body>
 </html>
+
