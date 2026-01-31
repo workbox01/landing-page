@@ -2,309 +2,315 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Landing</title>
+<title>Order Now</title>
 
-<!-- FONT -->
+<!-- =======================
+     EDITABLE: FONT
+     ======================= -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* ================================
-   === EDIT COLORS HERE ===
-   ================================ */
+/* ==================================================
+   EDITABLE: GLOBAL DESIGN VARIABLES
+   ================================================== */
 :root {
-  --purple: #6c63ff;
-  --black: #0b0b12;
-  --white: #ffffff;
-  --soft: #b8b8d1;
+  --card-bg: rgba(255,255,255,0.08);
+  --accent: #00ffd5;
+  --text-main: #ffffff;
+  --price-color: #00ffd5;
 }
 
-/* RESET */
+/* ==================================================
+   RESET & BASE
+   ================================================== */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: var(--black);
-  color: var(--white);
-  overflow-x: hidden;
+
+  /* =======================
+     EDITABLE: BACKGROUND IMAGE
+     ======================= */
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
-/* ================================
-   BACKGROUND IMAGE
-   ================================ */
-.background {
+/* Optional dark overlay for readability */
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  background: url("background.jpg") center/cover no-repeat;
-  filter: blur(10px) brightness(0.35);
-  z-index: -2;
+  background: rgba(0,0,0,0.55);
+  z-index: -1;
 }
 
-/* ================================
-   HEADER
-   ================================ */
-header {
-  padding: 20px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--purple);
-}
-
-.menu {
+/* ==================================================
+   PAGE WRAPPER
+   ================================================== */
+.page {
+  width: 100%;
+  max-width: 480px;
+  padding-bottom: 50px;
   position: relative;
 }
 
-.menu-btn {
-  font-size: 26px;
+/* ==================================================
+   HERO IMAGE
+   ================================================== */
+.hero img {
+  width: 100%;
+  display: block;
+}
+
+/* ==================================================
+   CARD (SECTION CONTAINER)
+   ================================================== */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  margin: 16px;
+  padding: 18px;
+  border-radius: 18px;
+  position: relative;
+}
+
+/* ==================================================
+   PRICE DISPLAY
+   ================================================== */
+.price {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--price-color);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.price.bump {
+  transform: scale(1.15);
+}
+
+/* ==================================================
+   QUANTITY DROPDOWN (TOP LAYER)
+   ================================================== */
+.quantity-layer {
+  position: relative;
+  z-index: 9999;
+}
+
+.quantity-box {
+  position: relative;
+}
+
+.quantity-selected {
+  background: rgba(0,0,0,0.4);
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.quantity-list {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.95);
+  border-radius: 12px;
+  display: none;
+  overflow: hidden;
+  z-index: 10000;
+}
+
+.quantity-list div {
+  padding: 12px;
   cursor: pointer;
 }
 
-.menu-box {
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background: rgba(20,20,40,0.95);
-  border-radius: 14px;
-  padding: 14px 18px;
-  display: none;
-  animation: fadeDown 0.3s ease;
+.quantity-list div:hover {
+  background: rgba(255,255,255,0.15);
 }
 
-.menu-box a {
-  display: block;
-  color: var(--white);
-  text-decoration: none;
-  margin: 8px 0;
-  font-size: 14px;
-}
-
-.menu-box a:hover {
-  color: var(--purple);
-}
-
-/* ================================
-   HERO PRODUCT IMAGE
-   ================================ */
-.hero {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.hero img {
-  width: 260px;
-  max-width: 90%;
-  filter: drop-shadow(0 20px 40px rgba(108,99,255,0.6));
-  animation: float 4s ease-in-out infinite;
-}
-
-/* ================================
-   ORDER CARD
-   ================================ */
-.card {
-  max-width: 420px;
-  margin: 30px auto;
-  background: rgba(15,15,30,0.92);
-  border-radius: 24px;
-  padding: 28px;
-  box-shadow: 0 0 40px rgba(108,99,255,0.25);
-  animation: fadeUp 0.8s ease;
-}
-
-.card h1 {
-  font-size: 26px;
-}
-
-.card p {
-  margin-top: 10px;
-  color: var(--soft);
-  font-size: 14px;
-}
-
-/* ================================
-   PRICE
-   ================================ */
-.price-box {
-  margin: 20px 0;
-}
-
-.old-price {
-  text-decoration: line-through;
-  color: #999;
-  font-size: 14px;
-  display: none;
-}
-
-.final-price {
-  font-size: 34px;
-  font-weight: 700;
-  color: var(--purple);
-}
-
-.discount {
-  margin-top: 6px;
-  font-size: 13px;
-  color: #7dffb3;
-}
-
-/* ================================
-   QUANTITY
-   ================================ */
-.qty {
-  margin: 20px 0;
-}
-
-.qty input {
+/* ==================================================
+   FORM
+   ================================================== */
+input, textarea {
   width: 100%;
   padding: 14px;
-  border-radius: 14px;
+  margin-bottom: 14px;
+  border-radius: 12px;
   border: none;
-  outline: none;
-  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* ================================
-   BUTTON
-   ================================ */
+textarea {
+  resize: vertical;
+}
+
+/* ==================================================
+   ORDER BUTTON
+   ================================================== */
 button {
   width: 100%;
   padding: 16px;
-  border-radius: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 14px;
   border: none;
-  background: linear-gradient(135deg, #6c63ff, #9b8cff);
-  color: white;
-  font-size: 16px;
+  background: var(--accent);
+  color: #000;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 30px rgba(108,99,255,0.7);
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-/* ================================
+/* ==================================================
    FOOTER IMAGE
-   ================================ */
-.footer-img {
-  margin-top: 60px;
-  text-align: center;
-}
-
-.footer-img img {
+   ================================================== */
+.footer img {
   width: 100%;
-  max-height: 280px;
-  object-fit: cover;
-  opacity: 0.85;
+  margin-top: 20px;
 }
-
-/* ================================
-   ANIMATIONS
-   ================================ */
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 </style>
 </head>
+
 <body>
 
-<div class="background"></div>
+<div class="page">
 
-<header>
-  <div class="logo">BrandName</div>
-  <div class="menu">
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
-    <div class="menu-box" id="menu">
-      <a href="#">Home</a>
-      <a href="#">Socials</a>
-      <a href="#">About Us</a>
+  <!-- =======================
+       HERO IMAGE
+       ======================= -->
+  <div class="hero">
+    <img src="product.jpg" alt="Product">
+  </div>
+
+  <!-- =======================
+       PRICE
+       ======================= -->
+  <div class="card">
+    <h2>Total Price</h2>
+    <div id="price" class="price">50 DH</div>
+  </div>
+
+  <!-- =======================
+       QUANTITY
+       ======================= -->
+  <div class="card quantity-layer">
+    <h2>Quantity</h2>
+    <div class="quantity-box">
+      <div id="quantitySelected" class="quantity-selected">1 item</div>
+      <div id="quantityList" class="quantity-list">
+        <div data-q="1">1 item</div>
+        <div data-q="2">2 items</div>
+        <div data-q="3">3 items</div>
+        <div data-q="4">4 items</div>
+        <div data-q="5">5 items</div>
+      </div>
     </div>
   </div>
-</header>
 
-<section class="hero">
-  <img src="product.jpg" alt="Product">
-</section>
-
-<section class="card">
-  <h1>Premium Product</h1>
-  <p>High quality, modern design, limited offer.</p>
-
-  <div class="price-box">
-    <div class="old-price" id="oldPrice">50 DH</div>
-    <div class="final-price" id="finalPrice">50 DH</div>
-    <div class="discount" id="discountText"></div>
+  <!-- =======================
+       CUSTOMER DETAILS
+       ======================= -->
+  <div class="card">
+    <h2>Your Details</h2>
+    <input id="fullName" placeholder="Full name">
+    <input id="phone" placeholder="Phone number">
+    <input id="email" type="email" placeholder="Email (gmail)">
+    <textarea id="address" placeholder="Shipping address"></textarea>
+    <textarea placeholder="Remarks (optional)"></textarea>
   </div>
 
-  <div class="qty">
-    <input type="number" min="1" max="10" value="1" id="qty">
+  <!-- =======================
+       ORDER BUTTON
+       ======================= -->
+  <div class="card">
+    <button id="orderBtn" disabled>ORDER NOW</button>
   </div>
 
-  <button>Finish Order</button>
-</section>
+  <!-- =======================
+       FOOTER IMAGE
+       ======================= -->
+  <div class="footer">
+    <img src="footer.jpg" alt="End">
+  </div>
 
-<div class="footer-img">
-  <img src="footer.jpg" alt="Footer">
 </div>
 
 <script>
+/* ==================================================
+   EDITABLE: BUSINESS SETTINGS
+   ================================================== */
+const UNIT_PRICE = 50;
 
-/* === DISCOUNT CONFIGURATION === */
-const basePrice = 50; // DH
+/* ==================================================
+   PRICE & QUANTITY LOGIC
+   ================================================== */
+const priceEl = document.getElementById("price");
+const quantitySelected = document.getElementById("quantitySelected");
+const quantityList = document.getElementById("quantityList");
 
-function updatePrice() {
-  const qty = parseInt(document.getElementById("qty").value);
-  let total = basePrice * qty;
-  let discounted = total;
+let currentQty = 1;
 
-  if (qty >= 2) discounted = total * 0.75;
-  if (qty >= 5) discounted = total * 0.6;
-  if (qty >= 10) discounted = total * 0.5;
+quantitySelected.addEventListener("click", (e) => {
+  e.stopPropagation();
+  quantityList.style.display =
+    quantityList.style.display === "block" ? "none" : "block";
+});
 
-  document.getElementById("finalPrice").innerText = Math.round(discounted) + " DH";
+document.addEventListener("click", () => {
+  quantityList.style.display = "none";
+});
 
-  if (qty === 1) {
-    document.getElementById("oldPrice").style.display = "none";
-    document.getElementById("discountText").innerText = "";
-  } else {
-    document.getElementById("oldPrice").style.display = "block";
-    document.getElementById("oldPrice").innerText = total + " DH";
-    document.getElementById("discountText").innerText =
-      "You save " + Math.round(total - discounted) + " DH";
-  }
+quantityList.querySelectorAll("div").forEach(item => {
+  item.addEventListener("click", () => {
+    currentQty = parseInt(item.dataset.q);
+    quantitySelected.textContent = item.textContent;
+    quantityList.style.display = "none";
+
+    const newPrice = currentQty * UNIT_PRICE;
+    priceEl.textContent = newPrice + " DH";
+
+    priceEl.classList.add("bump");
+    setTimeout(() => priceEl.classList.remove("bump"), 300);
+  });
+});
+
+/* ==================================================
+   FORM VALIDATION
+   ================================================== */
+const orderBtn = document.getElementById("orderBtn");
+const fullName = document.getElementById("fullName");
+const phone = document.getElementById("phone");
+const email = document.getElementById("email");
+const address = document.getElementById("address");
+
+function checkForm() {
+  orderBtn.disabled = !(
+    fullName.value.trim() &&
+    phone.value.trim() &&
+    email.value.trim() &&
+    address.value.trim()
+  );
 }
 
-document.getElementById("qty").addEventListener("input", updatePrice);
-
-function toggleMenu() {
-  const m = document.getElementById("menu");
-  m.style.display = m.style.display === "block" ? "none" : "block";
-}
-
-updatePrice();
-
+[fullName, phone, email, address].forEach(el =>
+  el.addEventListener("input", checkForm)
+);
 </script>
 
 </body>
