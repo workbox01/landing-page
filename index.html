@@ -1,279 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secure Order</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- =======================
-     EDITABLE: PREMIUM FONT
-     ======================= -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<title>Product Order</title>
+
+<!-- ================= FONT ================= -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ==================================================
-   EDITABLE: THEME VARIABLES
-   ================================================== */
+/* =========================================================
+   GLOBAL SETTINGS – EASY TO EDIT
+========================================================= */
 :root {
-  --accent: #00ffd5;
-  --accent-2: #4facfe;
-  --danger: #ff6b6b;
-  --glass: rgba(255,255,255,0.14);
-  --text-main: #ffffff;
+  --main-color: #ff6a00;
+  --glass-bg: rgba(255,255,255,0.12);
+  --text-color: #ffffff;
+
+  /* PRICE SETTINGS */
+  --original-price: 350;
+  --discounted-price: 210;
 }
 
-/* ==================================================
+/* =========================================================
    RESET
-   ================================================== */
+========================================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-html, body {
-  height: 100%;
-  font-family: 'Inter', sans-serif;
-}
-
-/* ==================================================
-   BACKGROUND IMAGE (FULL PAGE)
-   ================================================== */
+/* =========================================================
+   BACKGROUND IMAGE (FULL SCREEN)
+   👉 CHANGE IMAGE URL HERE
+========================================================= */
 body {
-  background-image: url("background.jpg"); /* EDIT */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: var(--text-main);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(
-    rgba(0,0,0,0.65),
-    rgba(0,0,0,0.8)
-  );
-  z-index: -1;
-}
-
-/* ==================================================
-   PAGE WRAPPER (MOBILE FIRST)
-   ================================================== */
-.page {
   min-height: 100vh;
-  max-width: 480px;
-  margin: auto;
+  background: 
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("background.jpg") no-repeat center center / cover;
   display: flex;
-  flex-direction: column;
-  padding-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
 }
 
-/* ==================================================
-   HERO
-   ================================================== */
-.hero img {
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+.container {
   width: 100%;
-  border-bottom-left-radius: 26px;
-  border-bottom-right-radius: 26px;
-}
-
-/* ==================================================
-   GLASS CARD
-   ================================================== */
-.card {
-  background: var(--glass);
-  backdrop-filter: blur(18px);
-  border-radius: 22px;
+  max-width: 420px;
   padding: 22px;
-  margin: 14px;
-  animation: fadeUp 0.6s ease forwards;
+  animation: fadeUp 1s ease;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* =========================================================
+   GLASS CARD
+========================================================= */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-.card h2 {
-  font-size: 20px;
-  margin-bottom: 14px;
-  font-weight: 700;
+/* =========================================================
+   PRODUCT IMAGE
+   👉 CHANGE IMAGE HERE
+========================================================= */
+.product-image {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 15px;
 }
 
-/* ==================================================
+/* =========================================================
    PRICE SECTION
-   ================================================== */
+========================================================= */
 .price-box {
-  text-align: center;
-}
-
-.old-price {
-  text-decoration: line-through;
-  color: #ff8b8b;
-  font-size: 18px;
-}
-
-.discount {
-  display: inline-block;
-  background: linear-gradient(135deg, #ff6b6b, #ff9472);
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 700;
-  margin: 10px 0;
-}
-
-.final-price {
-  font-size: 44px;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ==================================================
-   TRUST BADGES
-   ================================================== */
-.trust {
   display: flex;
   justify-content: space-between;
-  margin-top: 16px;
-  font-size: 13px;
-  opacity: 0.9;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-/* ==================================================
+.price-title {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.price-new {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--main-color);
+}
+
+.price-old {
+  font-size: 16px;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* =========================================================
    FORM
-   ================================================== */
+========================================================= */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 input, textarea {
   width: 100%;
-  padding: 16px;
-  border-radius: 14px;
+  padding: 14px;
+  border-radius: 12px;
   border: none;
-  margin-bottom: 14px;
-  font-size: 15px;
+  outline: none;
+  font-size: 14px;
 }
 
 textarea {
   resize: none;
+  height: 80px;
 }
 
-/* ==================================================
-   BUTTON
-   ================================================== */
+/* =========================================================
+   ORDER BUTTON
+========================================================= */
 button {
-  width: 100%;
-  padding: 18px;
-  border-radius: 18px;
-  font-size: 18px;
-  font-weight: 700;
+  margin-top: 10px;
+  padding: 15px;
+  border-radius: 14px;
   border: none;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #000;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,255,213,0.3);
-}
-
-button:disabled {
-  opacity: 0.4;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ff6a00, #ff9900);
+  color: white;
   cursor: not-allowed;
+  opacity: 0.5;
+  transition: all 0.3s ease;
 }
 
-/* ==================================================
-   FOOTER IMAGE
-   ================================================== */
-.footer img {
-  width: 100%;
-  margin-top: auto;
-  border-radius: 22px;
+button.enabled {
+  cursor: pointer;
+  opacity: 1;
+}
+
+button.enabled:hover {
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
-
-  <!-- =======================
-       HERO IMAGE
-       ======================= -->
-  <div class="hero">
-    <img src="product.jpg" alt="Product"> <!-- EDIT -->
-  </div>
-
-  <!-- =======================
-       PRICE & OFFER
-       ======================= -->
+<div class="container">
   <div class="card">
+
+    <!-- ================= PRODUCT IMAGE ================= -->
+    <img src="product.jpg" class="product-image" alt="Product">
+
+    <!-- ================= PRICE ================= -->
     <div class="price-box">
-
-      <!-- EDIT PRICES -->
-      <div class="old-price">85 DH</div>
-      <div class="discount">40% OFF</div>
-      <div class="final-price">50 DH</div>
-
-      <div class="trust">
-        <span>🚚 Fast delivery</span>
-        <span>🔒 Secure order</span>
-        <span>✅ Verified</span>
+      <div>
+        <div class="price-title">PRODUCT PRICE</div>
+        <div class="price-new" id="newPrice"></div>
       </div>
+      <div class="price-old" id="oldPrice"></div>
     </div>
+
+    <!-- ================= ORDER FORM ================= -->
+    <form id="orderForm">
+
+      <input type="text" id="name" placeholder="Full Name" required>
+
+      <input type="tel" id="phone" placeholder="Phone (06xxxxxxxx)" required>
+
+      <input type="email" id="email" placeholder="Email (gmail)" required>
+
+      <input type="text" id="address" placeholder="Delivery Address" required>
+
+      <!-- OPTIONAL -->
+      <textarea placeholder="Remarks (optional)"></textarea>
+
+      <button type="submit" id="orderBtn">CONFIRM ORDER</button>
+    </form>
+
   </div>
-
-  <!-- =======================
-       CUSTOMER DETAILS
-       ======================= -->
-  <div class="card">
-    <h2>Your Information</h2>
-
-    <input id="name" placeholder="Full name">
-    <input id="phone" placeholder="Phone number">
-    <input id="email" type="email" placeholder="Email (Gmail)">
-    <textarea id="address" placeholder="Shipping address"></textarea>
-    <textarea placeholder="Remarks (optional)"></textarea>
-  </div>
-
-  <!-- =======================
-       ORDER BUTTON
-       ======================= -->
-  <div class="card">
-    <button id="orderBtn" disabled>CONFIRM ORDER</button>
-  </div>
-
-  <!-- =======================
-       FOOTER IMAGE
-       ======================= -->
-  <div class="footer">
-    <img src="footer.jpg" alt="Footer"> <!-- EDIT -->
-  </div>
-
 </div>
 
 <script>
-/* ==================================================
+/* =========================================================
+   PRICE SETUP
+========================================================= */
+document.getElementById("oldPrice").textContent =
+  parseInt(getComputedStyle(document.documentElement)
+  .getPropertyValue('--original-price')) + " DH";
+
+document.getElementById("newPrice").textContent =
+  parseInt(getComputedStyle(document.documentElement)
+  .getPropertyValue('--discounted-price')) + " DH";
+
+/* =========================================================
    FORM VALIDATION
-   ================================================== */
-const fields = [
-  document.getElementById("name"),
-  document.getElementById("phone"),
-  document.getElementById("email"),
-  document.getElementById("address")
-];
+========================================================= */
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+const emailInput = document.getElementById("email");
+const addressInput = document.getElementById("address");
+const orderBtn = document.getElementById("orderBtn");
 
-const btn = document.getElementById("orderBtn");
+function validateForm() {
+  const phoneValid = /^0[67]\d{8}$/.test(phoneInput.value);
+  const emailValid = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(emailInput.value);
 
-function validate() {
-  btn.disabled = !fields.every(f => f.value.trim());
+  if (
+    nameInput.value.trim() !== "" &&
+    phoneValid &&
+    emailValid &&
+    addressInput.value.trim() !== ""
+  ) {
+    orderBtn.classList.add("enabled");
+    orderBtn.disabled = false;
+  } else {
+    orderBtn.classList.remove("enabled");
+    orderBtn.disabled = true;
+  }
 }
 
-fields.forEach(f => f.addEventListener("input", validate));
+document.querySelectorAll("input").forEach(input => {
+  input.addEventListener("input", validateForm);
+});
+
+/* =========================================================
+   SUBMIT (TEMP)
+========================================================= */
+document.getElementById("orderForm").addEventListener("submit", e => {
+  e.preventDefault();
+  alert("Order confirmed. Automation will be added next.");
+});
 </script>
 
 </body>
