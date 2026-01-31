@@ -5,268 +5,302 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product Landing</title>
 
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
-/* =====================================================
+/* ================================
    === EDIT COLORS HERE ===
-   ===================================================== */
+   ================================ */
 :root {
-  --primary: #6c63ff;
-  --dark: #0e0e16;
+  --purple: #6c63ff;
+  --black: #0b0b12;
   --white: #ffffff;
-  --gray: #b6b6d6;
+  --soft: #b8b8d1;
 }
 
-/* =====================================================
-   RESET
-   ===================================================== */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
-  background: var(--dark);
+  font-family: 'Poppins', sans-serif;
+  background: var(--black);
   color: var(--white);
+  overflow-x: hidden;
 }
 
-/* =====================================================
+/* ================================
    BACKGROUND IMAGE
-   ===================================================== */
+   ================================ */
 .background {
   position: fixed;
   inset: 0;
-  background:
-    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
-    url("images/bg.jpg");
-    /* === EDIT BACKGROUND IMAGE PATH HERE === */
-  background-size: cover;
-  background-position: center;
-  filter: blur(6px);
-  z-index: -1;
+  background: url("background.jpg") center/cover no-repeat;
+  filter: blur(10px) brightness(0.35);
+  z-index: -2;
 }
 
-/* =====================================================
-   PAGE CONTAINER
-   ===================================================== */
-.page {
-  max-width: 420px;
-  margin: auto;
-  padding: 20px;
-  animation: fadeIn 0.8s ease;
+/* ================================
+   HEADER
+   ================================ */
+header {
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* =====================================================
-   TOP IMAGE
-   ===================================================== */
-.top-image img {
-  width: 100%;
-  border-radius: 18px;
-  box-shadow: 0 20px 60px rgba(108,99,255,.45);
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--purple);
 }
 
-/* =====================================================
-   CARD
-   ===================================================== */
+.menu {
+  position: relative;
+}
+
+.menu-btn {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.menu-box {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: rgba(20,20,40,0.95);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: none;
+  animation: fadeDown 0.3s ease;
+}
+
+.menu-box a {
+  display: block;
+  color: var(--white);
+  text-decoration: none;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.menu-box a:hover {
+  color: var(--purple);
+}
+
+/* ================================
+   HERO PRODUCT IMAGE
+   ================================ */
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.hero img {
+  width: 260px;
+  max-width: 90%;
+  filter: drop-shadow(0 20px 40px rgba(108,99,255,0.6));
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ================================
+   ORDER CARD
+   ================================ */
 .card {
-  background: rgba(0,0,0,.65);
-  backdrop-filter: blur(12px);
-  border-radius: 22px;
-  padding: 22px;
-  margin-top: 20px;
-  box-shadow: 0 30px 80px rgba(0,0,0,.6);
-  animation: slideUp .8s ease;
+  max-width: 420px;
+  margin: 30px auto;
+  background: rgba(15,15,30,0.92);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 0 40px rgba(108,99,255,0.25);
+  animation: fadeUp 0.8s ease;
 }
 
 .card h1 {
-  text-align: center;
-  margin-bottom: 14px;
-  color: var(--primary);
+  font-size: 26px;
 }
 
-/* =====================================================
-   PRICE DISPLAY
-   ===================================================== */
+.card p {
+  margin-top: 10px;
+  color: var(--soft);
+  font-size: 14px;
+}
+
+/* ================================
+   PRICE
+   ================================ */
 .price-box {
-  text-align: center;
-  margin-bottom: 16px;
+  margin: 20px 0;
 }
 
 .old-price {
-  display: none;
-  color: #888;
   text-decoration: line-through;
-}
-
-.discount {
+  color: #999;
+  font-size: 14px;
   display: none;
-  color: #ff6fae;
-  margin-top: 4px;
 }
 
 .final-price {
   font-size: 34px;
-  font-weight: bold;
-  color: var(--primary);
+  font-weight: 700;
+  color: var(--purple);
 }
 
-/* =====================================================
-   FORM ELEMENTS
-   ===================================================== */
-select, input, textarea {
+.discount {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #7dffb3;
+}
+
+/* ================================
+   QUANTITY
+   ================================ */
+.qty {
+  margin: 20px 0;
+}
+
+.qty input {
   width: 100%;
   padding: 14px;
-  margin-top: 12px;
   border-radius: 14px;
   border: none;
-  background: #131320;
-  color: white;
+  outline: none;
+  font-size: 16px;
 }
 
-textarea {
-  resize: none;
-}
-
-/* =====================================================
+/* ================================
    BUTTON
-   ===================================================== */
+   ================================ */
 button {
   width: 100%;
   padding: 16px;
-  margin-top: 18px;
-  border: none;
   border-radius: 40px;
-  background: linear-gradient(135deg, var(--primary), #9d96ff);
+  border: none;
+  background: linear-gradient(135deg, #6c63ff, #9b8cff);
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
-  transition: transform .3s, box-shadow .3s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 60px rgba(108,99,255,.6);
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(108,99,255,0.7);
 }
 
-/* =====================================================
-   BOTTOM IMAGE
-   ===================================================== */
-.bottom-image img {
+/* ================================
+   FOOTER IMAGE
+   ================================ */
+.footer-img {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.footer-img img {
   width: 100%;
-  margin-top: 30px;
-  border-radius: 18px;
-  opacity: .9;
+  max-height: 280px;
+  object-fit: cover;
+  opacity: 0.85;
 }
 
-/* =====================================================
+/* ================================
    ANIMATIONS
-   ===================================================== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+   ================================ */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
 }
 
-@keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 </style>
 </head>
-
 <body>
 
 <div class="background"></div>
 
-<div class="page">
-
-  <!-- ================= TOP IMAGE ================= -->
-  <div class="top-image">
-    <img src="images/top.jpg">
-    <!-- === EDIT TOP IMAGE PATH HERE === -->
-  </div>
-
-  <!-- ================= MAIN CARD ================= -->
-  <div class="card">
-
-    <h1>Premium Product</h1>
-
-    <div class="price-box">
-      <div id="oldPrice" class="old-price">0 DH</div>
-      <div id="discountText" class="discount">Save 0 DH</div>
-      <div id="finalPrice" class="final-price">50 DH</div>
+<header>
+  <div class="logo">BrandName</div>
+  <div class="menu">
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="menu-box" id="menu">
+      <a href="#">Home</a>
+      <a href="#">Socials</a>
+      <a href="#">About Us</a>
     </div>
+  </div>
+</header>
 
-    <!-- Quantity -->
-    <select id="quantity"></select>
+<section class="hero">
+  <img src="product.jpg" alt="Product">
+</section>
 
-    <!-- Form -->
-    <input placeholder="Full Name" required>
-    <input placeholder="Phone Number" required>
-    <input type="email" placeholder="Email" required>
-    <textarea placeholder="Shipping Address"></textarea>
+<section class="card">
+  <h1>Premium Product</h1>
+  <p>High quality, modern design, limited offer.</p>
 
-    <button>ORDER NOW</button>
-
+  <div class="price-box">
+    <div class="old-price" id="oldPrice">50 DH</div>
+    <div class="final-price" id="finalPrice">50 DH</div>
+    <div class="discount" id="discountText"></div>
   </div>
 
-  <!-- ================= BOTTOM IMAGE ================= -->
-  <div class="bottom-image">
-    <img src="images/bottom.jpg">
-    <!-- === EDIT BOTTOM IMAGE PATH HERE === -->
+  <div class="qty">
+    <input type="number" min="1" max="10" value="1" id="qty">
   </div>
 
+  <button>Finish Order</button>
+</section>
+
+<div class="footer-img">
+  <img src="footer.jpg" alt="Footer">
 </div>
 
 <script>
 
-/* =====================================================
-   === EDIT PRICING HERE ===
-   ===================================================== */
-const UNIT_PRICE = 50;
-const MAX_QTY = 10;
-
-/* =====================================================
-   PRICE LOGIC
-   ===================================================== */
-const qtySelect = document.getElementById("quantity");
-const oldPrice = document.getElementById("oldPrice");
-const discountText = document.getElementById("discountText");
-const finalPrice = document.getElementById("finalPrice");
-
-/* Populate quantity */
-for (let i = 1; i <= MAX_QTY; i++) {
-  const opt = document.createElement("option");
-  opt.value = i;
-  opt.textContent = i + " item(s)";
-  qtySelect.appendChild(opt);
-}
-
-qtySelect.addEventListener("change", updatePrice);
+/* === DISCOUNT CONFIGURATION === */
+const basePrice = 50; // DH
 
 function updatePrice() {
-  const qty = parseInt(qtySelect.value);
-  const original = qty * UNIT_PRICE;
+  const qty = parseInt(document.getElementById("qty").value);
+  let total = basePrice * qty;
+  let discounted = total;
+
+  if (qty >= 2) discounted = total * 0.75;
+  if (qty >= 5) discounted = total * 0.6;
+  if (qty >= 10) discounted = total * 0.5;
+
+  document.getElementById("finalPrice").innerText = Math.round(discounted) + " DH";
 
   if (qty === 1) {
-    oldPrice.style.display = "none";
-    discountText.style.display = "none";
-    finalPrice.textContent = original + " DH";
-    return;
+    document.getElementById("oldPrice").style.display = "none";
+    document.getElementById("discountText").innerText = "";
+  } else {
+    document.getElementById("oldPrice").style.display = "block";
+    document.getElementById("oldPrice").innerText = total + " DH";
+    document.getElementById("discountText").innerText =
+      "You save " + Math.round(total - discounted) + " DH";
   }
+}
 
-  const discountRate = Math.min(0.5, qty * 0.05);
-  const discountAmount = original * discountRate;
-  const final = original - discountAmount;
+document.getElementById("qty").addEventListener("input", updatePrice);
 
-  oldPrice.style.display = "block";
-  discountText.style.display = "block";
-
-  oldPrice.textContent = original + " DH";
-  discountText.textContent = "Save " + discountAmount.toFixed(0) + " DH";
-  finalPrice.textContent = final.toFixed(0) + " DH";
+function toggleMenu() {
+  const m = document.getElementById("menu");
+  m.style.display = m.style.display === "block" ? "none" : "block";
 }
 
 updatePrice();
