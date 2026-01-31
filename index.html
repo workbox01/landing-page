@@ -1,300 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Landing Page</title>
+  <meta charset="UTF-8" />
+  <title>Modern Landing Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ===================== EDIT: FONT ===================== -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- ===============================
+       THEME COLORS (EDIT HERE)
+  ================================ -->
+  <style>
+    :root {
+      --purple: #7b2cff;
+      --black: #0b0b0f;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.08);
+    }
 
-<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
 
-/* =====================================================
-   🎨 EDIT: GLOBAL THEME (COLORS & FONT)
-   ===================================================== */
-:root{
-  --purple:#7a3cff;
-  --black:#0b0b0f;
-  --white:#ffffff;
-  --soft:#b8b8c7;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:'Poppins',sans-serif;
-  background:var(--black);
-  color:var(--white);
-  overflow-x:hidden;
-}
-
-/* =====================================================
-   🔝 NAVBAR (DESKTOP + MOBILE)
-   ===================================================== */
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:16px 32px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-}
-
-/* EDIT: BRAND NAME */
-.logo{
-  font-size:20px;
-  font-weight:700;
-  color:var(--purple);
-}
-
-/* DESKTOP MENU */
-.nav-links{
-  display:flex;
-  gap:24px;
-}
-.nav-links a{
-  text-decoration:none;
-  color:var(--soft);
-}
-.nav-links a:hover{color:var(--white)}
-
-/* MOBILE MENU BUTTON */
-#menuBtn{
-  display:none;
-  font-size:26px;
-  cursor:pointer;
-}
-
-/* =====================================================
-   📱 MOBILE DROPDOWN MENU (CORNER, NOT FULL SCREEN)
-   ===================================================== */
-#mobileMenu{
-  position:fixed;
-  top:70px;
-  right:20px;
-  width:220px;
-  background:#111;
-  border-radius:18px;
-  padding:20px;
-  display:none;
-  flex-direction:column;
-  gap:14px;
-  box-shadow:0 20px 50px rgba(122,60,255,.35);
-  animation:menuIn .35s ease;
-  z-index:999;
-}
-
-#mobileMenu a{
-  color:white;
-  text-decoration:none;
-  font-size:16px;
-}
-
-#mobileMenu a:hover{
-  color:var(--purple);
-}
-
-@keyframes menuIn{
-  from{opacity:0;transform:translateY(-10px) scale(.95)}
-  to{opacity:1;transform:none}
-}
-
-@media(max-width:768px){
-  .nav-links{display:none}
-  #menuBtn{display:block}
-}
-
-/* =====================================================
-   🦸 HERO SECTION
-   ===================================================== */
-.hero{
-  min-height:100vh;
-  padding:120px 32px;
-  display:flex;
-  align-items:center;
-  background:
-    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
-    url("https://images.unsplash.com/photo-1612817288484-6f916006741a");
-  /* EDIT: HERO IMAGE */
-  background-size:cover;
-  background-position:center;
-}
-
-.hero-content{
-  max-width:600px;
-  animation:fadeUp 1s ease;
-}
-
-/* EDIT: HERO TEXT */
-.hero h1{font-size:48px;line-height:1.2}
-.hero p{margin-top:18px;color:var(--soft)}
-
-.hero button{
-  margin-top:28px;
-  padding:16px 40px;
-  border:none;
-  border-radius:40px;
-  background:var(--purple);
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-
-/* =====================================================
-   🖼 IMAGE SLIDER
-   ===================================================== */
-.slider{
-  padding:80px 32px;
-  display:flex;
-  gap:20px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-}
-
-.slider img{
-  min-width:300px;
-  height:380px;
-  object-fit:cover;
-  border-radius:20px;
-  scroll-snap-align:center;
-  transition:transform .4s;
-}
-
-/* EDIT: SLIDE IMAGES */
-.slider img:hover{transform:scale(1.05)}
-
-/* =====================================================
-   ℹ INFO SECTIONS
-   ===================================================== */
-.section{
-  padding:80px 32px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:40px;
-  align-items:center;
-}
-
-.section img{
-  width:100%;
-  border-radius:24px;
-}
-
-/* EDIT: SECTION TEXT */
-.section h2{font-size:32px}
-.section p{margin-top:14px;color:var(--soft)}
-
-/* =====================================================
-   🛒 ORDER SECTION (LOGIC LATER)
-   ===================================================== */
-.order{
-  padding:80px 32px;
-  background:linear-gradient(135deg,#151522,#0b0b0f);
-  text-align:center;
-}
-
-.order h2{font-size:36px;margin-bottom:20px}
-
-/* =====================================================
-   ✨ ANIMATIONS
-   ===================================================== */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:none}
-}
-
-</style>
+    body {
+      background: linear-gradient(120deg, #0b0b0f, #1a102f);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ===================== NAV ===================== -->
-<nav>
-  <div class="logo">BrandName</div>
+<!-- =================================================
+     HEADER / NAVBAR
+================================================= -->
+<header class="navbar">
+  <div class="brand">Aromaliight</div>
 
-  <!-- EDIT: DESKTOP MENU -->
-  <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Socials</a>
+  <div class="nav-icons">
+    <!-- Basket Button -->
+    <button class="basket-btn" onclick="toggleBasket()">🛒</button>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
+</header>
 
-  <!-- MOBILE MENU ICON -->
-  <div id="menuBtn">☰</div>
-</nav>
+<style>
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(11,11,15,0.85);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
 
-<!-- MOBILE MENU -->
-<div id="mobileMenu">
-  <!-- EDIT: MOBILE MENU LINKS -->
+.brand {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--white);
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.basket-btn {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 26px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: var(--white);
+  margin: 5px 0;
+  transition: 0.3s;
+}
+</style>
+
+---
+
+<!-- =================================================
+     SIDE MENU (NOT FULL SCREEN)
+================================================= -->
+<aside class="side-menu" id="sideMenu">
   <a href="#">Home</a>
   <a href="#">About Us</a>
   <a href="#">Instagram</a>
   <a href="#">Facebook</a>
+</aside>
+
+<style>
+.side-menu {
+  position: fixed;
+  top: 70px;
+  right: -220px;
+  width: 200px;
+  background: rgba(20,20,30,0.95);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: right 0.4s ease;
+  z-index: 999;
+}
+
+.side-menu a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.side-menu a:hover {
+  color: var(--purple);
+}
+
+.side-menu.active {
+  right: 14px;
+}
+</style>
+
+---
+
+<!-- =================================================
+     HERO / SLIDER SECTION
+================================================= -->
+<section class="hero">
+
+  <!-- IMAGE SLIDES (REPLACE LATER) -->
+  <div class="slides">
+    <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f"
+         alt="Slide 1" />
+    <img src="https://images.unsplash.com/photo-1585386959984-a41552231693"
+         alt="Slide 2" />
+    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6"
+         alt="Slide 3" />
+  </div>
+
+  <div class="hero-text">
+    <h1>Smart Home Lighting</h1>
+    <p>Modern design. Powerful control. Clean ambiance.</p>
+    <button onclick="addToCart('Smart Lamp', 49)">Add to Basket — $49</button>
+  </div>
+
+</section>
+
+<style>
+.hero {
+  margin-top: 80px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.slides {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  scroll-snap-type: x mandatory;
+}
+
+.slides img {
+  min-width: 90%;
+  border-radius: 18px;
+  scroll-snap-align: center;
+}
+
+.hero-text {
+  margin-top: 30px;
+}
+
+.hero-text h1 {
+  font-size: 2rem;
+  color: var(--purple);
+}
+
+.hero-text p {
+  opacity: 0.85;
+  margin: 10px 0 20px;
+}
+
+.hero-text button {
+  padding: 12px 24px;
+  background: var(--purple);
+  border: none;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+}
+</style>
+
+---
+
+<!-- =================================================
+     BASKET POPUP (DRAWER STYLE)
+================================================= -->
+<div class="basket" id="basket">
+  <h3>Your Basket</h3>
+  <div id="basketItems"></div>
+  <p>Total: $<span id="totalPrice">0</span></p>
+  <button class="checkout">Finish Order</button>
 </div>
 
-<!-- ===================== HERO ===================== -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Premium Home Product</h1>
-    <p>Modern design. Smart comfort. Built for your lifestyle.</p>
-    <button>Order Now</button>
-  </div>
-</section>
+<style>
+.basket {
+  position: fixed;
+  bottom: -100%;
+  right: 20px;
+  width: 280px;
+  background: rgba(20,20,30,0.95);
+  padding: 18px;
+  border-radius: 18px;
+  transition: bottom 0.4s ease;
+  z-index: 1000;
+}
 
-<!-- ===================== SLIDER ===================== -->
-<section class="slider">
-  <!-- EDIT: SLIDE IMAGES -->
-  <img src="https://images.unsplash.com/photo-1582582429416-5d6d9a6b67b8">
-  <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed">
-  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
-</section>
+.basket.active {
+  bottom: 20px;
+}
 
-<!-- ===================== INFO 1 ===================== -->
-<section class="section">
-  <!-- EDIT: IMAGE -->
-  <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
-  <div>
-    <h2>Designed for Modern Living</h2>
-    <p>High quality materials with a clean and elegant finish.</p>
-  </div>
-</section>
+.basket h3 {
+  margin-bottom: 12px;
+}
 
-<!-- ===================== INFO 2 ===================== -->
-<section class="section">
-  <div>
-    <h2>Easy to Use</h2>
-    <p>Simple setup that fits perfectly in any home.</p>
-  </div>
-  <!-- EDIT: IMAGE -->
-  <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c">
-</section>
+.checkout {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  background: var(--purple);
+  border: none;
+  border-radius: 20px;
+  color: white;
+}
+</style>
 
-<!-- ===================== ORDER ===================== -->
-<section class="order">
-  <h2>Ready to Order?</h2>
-  <p>Fast delivery. Secure process.</p>
-</section>
+---
 
-<!-- ===================== MENU SCRIPT ===================== -->
+<!-- =================================================
+     JAVASCRIPT (LOGIC)
+================================================= -->
 <script>
-/* MOBILE MENU TOGGLE */
-const menuBtn=document.getElementById("menuBtn");
-const mobileMenu=document.getElementById("mobileMenu");
+let menuOpen = false;
+let basketOpen = false;
+let cart = [];
+let total = 0;
 
-menuBtn.onclick=()=>{
-  mobileMenu.style.display=
-    mobileMenu.style.display==="flex"?"none":"flex";
-};
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById("sideMenu")
+    .classList.toggle("active", menuOpen);
+}
 
-document.addEventListener("click",e=>{
-  if(!menuBtn.contains(e.target)&&!mobileMenu.contains(e.target)){
-    mobileMenu.style.display="none";
-  }
-});
+function toggleBasket() {
+  basketOpen = !basketOpen;
+  document.getElementById("basket")
+    .classList.toggle("active", basketOpen);
+}
+
+function addToCart(name, price) {
+  cart.push({ name, price });
+  total += price;
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById("basketItems");
+  container.innerHTML = "";
+  cart.forEach(item => {
+    const div = document.createElement("div");
+    div.textContent = `${item.name} — $${item.price}`;
+    container.appendChild(div);
+  });
+  document.getElementById("totalPrice").textContent = total;
+}
 </script>
 
 </body>
