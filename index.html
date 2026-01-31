@@ -1,279 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Modern Product Landing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Landing Page</title>
 
-  <!-- =========================
-       MARKER: GLOBAL STYLES
-  ========================== -->
-  <style>
-    :root {
-      --purple: #7b3fe4;
-      --black: #0b0b0b;
-      --white: #ffffff;
-      --gray: #b5b5b5;
-    }
+<!-- =========================
+     GOOGLE FONT
+========================= -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", system-ui, sans-serif;
-    }
+<style>
+/* ==================================================
+   🔧 EDITABLE GLOBAL SETTINGS
+================================================== */
+:root {
+  --purple: #7b3fe4;
+  --black: #0b0b0f;
+  --white: #ffffff;
+  --soft-white: #dcdcdc;
+}
 
-    body {
-      background: linear-gradient(180deg, #0b0b0b, #120820);
-      color: var(--white);
-      overflow-x: hidden;
-    }
+/* ==================================================
+   RESET & BASE (MOBILE FIRST)
+================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--black);
+  color: var(--white);
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+/* ==================================================
+   🔝 TOP MOBILE NAV
+================================================== */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
 
-    section {
-      padding: 80px 8%;
-    }
-  </style>
+.nav .logo {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.nav .menu {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ==================================================
+   📸 HERO / SLIDER
+================================================== */
+.hero {
+  margin-top: 70px;
+}
+
+.slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slide {
+  min-width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
+
+/* ==================================================
+   ✨ HERO TEXT
+================================================== */
+.hero-text {
+  padding: 24px;
+  text-align: center;
+  animation: fadeUp 1s ease;
+}
+
+.hero-text h1 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.hero-text p {
+  color: var(--soft-white);
+  font-size: 15px;
+}
+
+/* ==================================================
+   🔘 CTA BUTTON
+================================================== */
+.cta {
+  margin-top: 20px;
+}
+
+.cta button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--purple), #a98bff);
+  border: none;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+/* ==================================================
+   📦 INFO SECTIONS
+================================================== */
+.section {
+  padding: 30px 20px;
+  animation: fadeUp 1s ease;
+}
+
+.section img {
+  width: 100%;
+  border-radius: 18px;
+  margin-bottom: 14px;
+}
+
+.section h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.section p {
+  font-size: 14px;
+  color: var(--soft-white);
+  line-height: 1.6;
+}
+
+/* ==================================================
+   💳 PRICE BOX
+================================================== */
+.price-box {
+  background: rgba(255,255,255,0.06);
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.price {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--purple);
+}
+
+/* ==================================================
+   🧾 FOOTER
+================================================== */
+.footer {
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* ==================================================
+   🎞️ ANIMATIONS
+================================================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(123,63,228,0.6); }
+  70% { box-shadow: 0 0 0 18px rgba(123,63,228,0); }
+  100% { box-shadow: 0 0 0 0 rgba(123,63,228,0); }
+}
+</style>
 </head>
 
 <body>
 
 <!-- =========================
-     MARKER: TOP NAVBAR
-========================== -->
-<header class="navbar">
-  <div class="logo">PURPLE<span>X</span></div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Features</a>
-    <a href="#">Gallery</a>
-    <a href="#">Order</a>
-  </nav>
-</header>
-
-<style>
-  .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 70px;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 8%;
-    z-index: 1000;
-  }
-
-  .logo {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-
-  .logo span {
-    color: var(--purple);
-  }
-
-  nav a {
-    margin-left: 30px;
-    font-size: 15px;
-    color: var(--gray);
-    transition: 0.3s;
-  }
-
-  nav a:hover {
-    color: var(--white);
-  }
-</style>
+     NAVBAR
+========================= -->
+<div class="nav">
+  <div class="logo">MyProduct</div>
+  <div class="menu">☰</div>
+</div>
 
 <!-- =========================
-     MARKER: HERO SECTION
-========================== -->
-<section class="hero">
+     HERO / SLIDER
+========================= -->
+<div class="hero">
+  <div class="slider">
+    <div class="slides" id="slides">
+      <div class="slide"><img src="img1.jpg"></div>
+      <div class="slide"><img src="img2.jpg"></div>
+      <div class="slide"><img src="img3.jpg"></div>
+    </div>
+  </div>
+
   <div class="hero-text">
     <h1>Upgrade Your Home Experience</h1>
-    <p>Modern design. Smart usability. Premium quality.</p>
-    <button class="cta">Order Now</button>
+    <p>Elegant. Powerful. Designed for everyday comfort.</p>
+
+    <div class="cta">
+      <button>Order Now</button>
+    </div>
   </div>
-
-  <div class="hero-image">
-    <img src="https://images.unsplash.com/photo-1582582429416-5c1d5b25c7ad" alt="Product">
-  </div>
-</section>
-
-<style>
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 40px;
-    padding-top: 120px;
-  }
-
-  .hero-text h1 {
-    font-size: 52px;
-    line-height: 1.1;
-    margin-bottom: 20px;
-  }
-
-  .hero-text p {
-    color: var(--gray);
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
-
-  .cta {
-    background: linear-gradient(135deg, var(--purple), #a57cff);
-    color: white;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .cta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(123,63,228,0.4);
-  }
-
-  .hero-image img {
-    border-radius: 30px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  }
-</style>
+</div>
 
 <!-- =========================
-     MARKER: IMAGE SLIDER
-========================== -->
-<section class="slider-section">
-  <h2>Product Gallery</h2>
+     INFO SECTIONS
+========================= -->
+<div class="section">
+  <img src="info1.jpg">
+  <h2>Premium Quality</h2>
+  <p>Crafted with high-grade materials for durability and elegance.</p>
+</div>
 
-  <div class="slider">
-    <img class="active" src="https://images.unsplash.com/photo-1606813909355-c1a0c1c8e2db">
-    <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c">
-    <img src="https://images.unsplash.com/photo-1601972599720-6f1f1e2f4b57">
-  </div>
-</section>
+<div class="section">
+  <img src="info2.jpg">
+  <h2>Easy Installation</h2>
+  <p>Install in minutes with no special tools required.</p>
+</div>
 
-<style>
-  .slider-section h2 {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 40px;
-  }
-
-  .slider {
-    position: relative;
-    max-width: 800px;
-    margin: auto;
-  }
-
-  .slider img {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 1s ease;
-    border-radius: 25px;
-  }
-
-  .slider img.active {
-    opacity: 1;
-    position: relative;
-  }
-</style>
+<div class="section">
+  <img src="info3.jpg">
+  <h2>Fast Delivery</h2>
+  <p>Quick shipping straight to your door.</p>
+</div>
 
 <!-- =========================
-     MARKER: FEATURES SECTION
-========================== -->
-<section class="features">
-  <div class="feature">
-    <h3>Premium Materials</h3>
-    <p>Built with durability and elegance in mind.</p>
-  </div>
-
-  <div class="feature">
-    <h3>Modern Design</h3>
-    <p>Minimalist look that fits every home.</p>
-  </div>
-
-  <div class="feature">
-    <h3>Easy Installation</h3>
-    <p>No tools. No stress. Plug & use.</p>
-  </div>
-</section>
-
-<style>
-  .features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-  }
-
-  .feature {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: 40px;
-    border-radius: 25px;
-    transition: transform 0.3s, border 0.3s;
-  }
-
-  .feature:hover {
-    transform: translateY(-8px);
-    border-color: var(--purple);
-  }
-
-  .feature h3 {
-    margin-bottom: 15px;
-  }
-
-  .feature p {
-    color: var(--gray);
-  }
-</style>
+     PRICE
+========================= -->
+<div class="price-box">
+  <div class="price">50 DH</div>
+</div>
 
 <!-- =========================
-     MARKER: FOOTER
-========================== -->
-<footer class="footer">
-  <p>© 2026 PurpleX. All rights reserved.</p>
-</footer>
-
-<style>
-  .footer {
-    text-align: center;
-    padding: 40px;
-    color: var(--gray);
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-</style>
+     FOOTER
+========================= -->
+<div class="footer">
+  © 2026 • All rights reserved
+</div>
 
 <!-- =========================
-     MARKER: JAVASCRIPT
-========================== -->
+     SLIDER SCRIPT
+========================= -->
 <script>
-  // Image slider automation
-  const slides = document.querySelectorAll(".slider img");
-  let index = 0;
+let index = 0;
+const slides = document.getElementById("slides");
+const total = slides.children.length;
 
-  setInterval(() => {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-  }, 3000);
+setInterval(() => {
+  index = (index + 1) % total;
+  slides.style.transform = `translateX(-${index * 100}%)`;
+}, 3000);
 </script>
 
 </body>
