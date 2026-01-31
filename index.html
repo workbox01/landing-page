@@ -3,119 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Now</title>
+<title>Secure Order</title>
 
 <!-- =======================
-     EDITABLE: FONT
+     EDITABLE: PREMIUM FONT
      ======================= -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* ==================================================
-   EDITABLE: GLOBAL SETTINGS
+   EDITABLE: THEME VARIABLES
    ================================================== */
 :root {
   --accent: #00ffd5;
+  --accent-2: #4facfe;
+  --danger: #ff6b6b;
+  --glass: rgba(255,255,255,0.14);
   --text-main: #ffffff;
-  --price-color: #00ffd5;
-  --old-price: #ff6b6b;
-  --card-bg: rgba(255,255,255,0.10);
 }
 
 /* ==================================================
    RESET
    ================================================== */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 html, body {
   height: 100%;
+  font-family: 'Inter', sans-serif;
 }
 
+/* ==================================================
+   BACKGROUND IMAGE (FULL PAGE)
+   ================================================== */
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-
-  /* =======================
-     EDITABLE: BACKGROUND IMAGE
-     ======================= */
-  background-image: url("background.jpg");
+  background-image: url("background.jpg"); /* EDIT */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   color: var(--text-main);
 }
 
-/* Dark overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: linear-gradient(
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.8)
+  );
   z-index: -1;
 }
 
 /* ==================================================
-   FULL SCREEN MOBILE WRAPPER
+   PAGE WRAPPER (MOBILE FIRST)
    ================================================== */
 .page {
   min-height: 100vh;
-  width: 100%;
   max-width: 480px;
-  margin: 0 auto;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  padding-bottom: 20px;
 }
 
 /* ==================================================
-   HERO IMAGE
+   HERO
    ================================================== */
 .hero img {
   width: 100%;
-  display: block;
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
 }
 
 /* ==================================================
-   CARD
+   GLASS CARD
    ================================================== */
 .card {
-  background: var(--card-bg);
-  backdrop-filter: blur(14px);
-  margin: 12px;
-  padding: 18px;
-  border-radius: 18px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  padding: 22px;
+  margin: 14px;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+  font-size: 20px;
+  margin-bottom: 14px;
+  font-weight: 700;
 }
 
 /* ==================================================
-   PRICE SECTION (DISCOUNT)
+   PRICE SECTION
    ================================================== */
 .price-box {
   text-align: center;
 }
 
 .old-price {
-  font-size: 18px;
-  color: var(--old-price);
   text-decoration: line-through;
-  margin-bottom: 6px;
+  color: #ff8b8b;
+  font-size: 18px;
 }
 
-.discount-badge {
+.discount {
   display: inline-block;
-  background: #ff6b6b;
-  color: #fff;
+  background: linear-gradient(135deg, #ff6b6b, #ff9472);
+  padding: 6px 14px;
+  border-radius: 30px;
   font-size: 14px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  margin-bottom: 8px;
+  font-weight: 700;
+  margin: 10px 0;
 }
 
 .final-price {
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--price-color);
+  font-size: 44px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==================================================
+   TRUST BADGES
+   ================================================== */
+.trust {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-size: 13px;
+  opacity: 0.9;
 }
 
 /* ==================================================
@@ -123,15 +149,15 @@ body::before {
    ================================================== */
 input, textarea {
   width: 100%;
-  padding: 14px;
-  margin-bottom: 14px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 14px;
   border: none;
-  font-family: 'Poppins', sans-serif;
+  margin-bottom: 14px;
+  font-size: 15px;
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
 }
 
 /* ==================================================
@@ -140,13 +166,19 @@ textarea {
 button {
   width: 100%;
   padding: 18px;
+  border-radius: 18px;
   font-size: 18px;
-  font-weight: 600;
-  border-radius: 14px;
+  font-weight: 700;
   border: none;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #000;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,255,213,0.3);
 }
 
 button:disabled {
@@ -160,6 +192,7 @@ button:disabled {
 .footer img {
   width: 100%;
   margin-top: auto;
+  border-radius: 22px;
 }
 </style>
 </head>
@@ -172,24 +205,25 @@ button:disabled {
        HERO IMAGE
        ======================= -->
   <div class="hero">
-    <img src="product.jpg" alt="Product">
+    <img src="product.jpg" alt="Product"> <!-- EDIT -->
   </div>
 
   <!-- =======================
-       TOTAL PRICE (DISCOUNTED)
+       PRICE & OFFER
        ======================= -->
   <div class="card">
-    <h2>Total Price</h2>
-
     <div class="price-box">
-      <!-- EDIT ORIGINAL PRICE -->
+
+      <!-- EDIT PRICES -->
       <div class="old-price">85 DH</div>
-
-      <!-- EDIT DISCOUNT LABEL -->
-      <div class="discount-badge">40% OFF</div>
-
-      <!-- EDIT FINAL PRICE -->
+      <div class="discount">40% OFF</div>
       <div class="final-price">50 DH</div>
+
+      <div class="trust">
+        <span>🚚 Fast delivery</span>
+        <span>🔒 Secure order</span>
+        <span>✅ Verified</span>
+      </div>
     </div>
   </div>
 
@@ -197,11 +231,11 @@ button:disabled {
        CUSTOMER DETAILS
        ======================= -->
   <div class="card">
-    <h2>Your Details</h2>
+    <h2>Your Information</h2>
 
-    <input id="fullName" placeholder="Full name">
+    <input id="name" placeholder="Full name">
     <input id="phone" placeholder="Phone number">
-    <input id="email" type="email" placeholder="Email (gmail)">
+    <input id="email" type="email" placeholder="Email (Gmail)">
     <textarea id="address" placeholder="Shipping address"></textarea>
     <textarea placeholder="Remarks (optional)"></textarea>
   </div>
@@ -210,14 +244,14 @@ button:disabled {
        ORDER BUTTON
        ======================= -->
   <div class="card">
-    <button id="orderBtn" disabled>ORDER NOW</button>
+    <button id="orderBtn" disabled>CONFIRM ORDER</button>
   </div>
 
   <!-- =======================
        FOOTER IMAGE
        ======================= -->
   <div class="footer">
-    <img src="footer.jpg" alt="End">
+    <img src="footer.jpg" alt="Footer"> <!-- EDIT -->
   </div>
 
 </div>
@@ -226,24 +260,20 @@ button:disabled {
 /* ==================================================
    FORM VALIDATION
    ================================================== */
-const orderBtn = document.getElementById("orderBtn");
-const fullName = document.getElementById("fullName");
-const phone = document.getElementById("phone");
-const email = document.getElementById("email");
-const address = document.getElementById("address");
+const fields = [
+  document.getElementById("name"),
+  document.getElementById("phone"),
+  document.getElementById("email"),
+  document.getElementById("address")
+];
 
-function checkForm() {
-  orderBtn.disabled = !(
-    fullName.value.trim() &&
-    phone.value.trim() &&
-    email.value.trim() &&
-    address.value.trim()
-  );
+const btn = document.getElementById("orderBtn");
+
+function validate() {
+  btn.disabled = !fields.every(f => f.value.trim());
 }
 
-[fullName, phone, email, address].forEach(el =>
-  el.addEventListener("input", checkForm)
-);
+fields.forEach(f => f.addEventListener("input", validate));
 </script>
 
 </body>
