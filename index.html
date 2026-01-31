@@ -205,33 +205,79 @@ nav ul li:hover {
     transform: translateY(0);
   }
 }
-   /* ===================== MOBILE MENU ===================== */
+   /* ===================== MODERN MOBILE MENU ===================== */
+
 #menuBtn{
   display:none;
-  font-size:26px;
+  font-size:28px;
   cursor:pointer;
   color:#fff;
+  transition:transform .3s ease;
 }
 
-#mobileMenu{
+/* Overlay */
+#mobileMenuOverlay{
   position:fixed;
-  top:70px;
-  right:20px;
-  background:#0b0b0f;
-  border-radius:16px;
-  padding:20px;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(10px);
   display:none;
-  flex-direction:column;
-  gap:14px;
+  align-items:center;
+  justify-content:center;
   z-index:9999;
-  box-shadow:0 20px 40px rgba(0,0,0,.6);
 }
 
-#mobileMenu a{
+/* Menu Box */
+#mobileMenuBox{
+  background:rgba(20,20,30,.9);
+  border-radius:24px;
+  padding:40px 50px;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  transform:scale(.8) translateY(20px);
+  opacity:0;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 30px 80px rgba(122,60,255,.35);
+}
+
+/* Active animation */
+#mobileMenuOverlay.active #mobileMenuBox{
+  transform:scale(1) translateY(0);
+  opacity:1;
+}
+
+#mobileMenuBox a{
   color:white;
   text-decoration:none;
-  font-size:16px;
+  font-size:20px;
+  text-align:center;
+  position:relative;
 }
+
+/* Purple glow hover */
+#mobileMenuBox a::after{
+  content:"";
+  position:absolute;
+  bottom:-6px;
+  left:50%;
+  width:0;
+  height:2px;
+  background:#7a3cff;
+  transition:.3s;
+  transform:translateX(-50%);
+}
+
+#mobileMenuBox a:hover::after{
+  width:50%;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .desktop-menu{display:none;}
+  #menuBtn{display:block;}
+}
+
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width:768px){
@@ -264,13 +310,16 @@ nav ul li:hover {
   <div id="menuBtn">☰</div>
 </nav>
    
-<!-- ===================== MOBILE MENU ===================== -->
-<div id="mobileMenu">
-  <a href="#">Home</a>
-  <a href="#">About Us</a>
-  <a href="#">Instagram</a>
-  <a href="#">Facebook</a>
+<!-- ===================== MODERN MOBILE MENU ===================== -->
+<div id="mobileMenuOverlay">
+  <div id="mobileMenuBox">
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+  </div>
 </div>
+
 
 
 <!-- ===================== HERO ===================== -->
@@ -541,6 +590,30 @@ form.addEventListener("input", () => {
   cursor:pointer;
 }
 </style>
+ <script>
+/* ===================== MODERN MOBILE MENU LOGIC ===================== */
+const menuBtn = document.getElementById("menuBtn");
+const overlay = document.getElementById("mobileMenuOverlay");
+
+let menuOpen = false;
+
+menuBtn.onclick = () => {
+  menuOpen = !menuOpen;
+  overlay.style.display = "flex";
+  setTimeout(()=>overlay.classList.toggle("active",menuOpen),10);
+  menuBtn.style.transform = menuOpen ? "rotate(90deg)" : "rotate(0deg)";
+};
+
+overlay.onclick = e => {
+  if(e.target === overlay){
+    overlay.classList.remove("active");
+    menuBtn.style.transform = "rotate(0deg)";
+    setTimeout(()=>overlay.style.display="none",300);
+    menuOpen = false;
+  }
+};
+</script>
+
 <script>
 /* =====================================================
    🧺 BASKET LOGIC (CONNECTED TO STEP 2)
