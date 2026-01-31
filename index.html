@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modern Product Landing</title>
 
-<!-- GOOGLE FONT -->
+<!-- ================= GOOGLE FONT ================= -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -37,7 +37,7 @@ body {
 }
 
 /* =====================================================
-   🔝 TOP NAVBAR
+   🔝 TOP NAVBAR (DESKTOP + MOBILE)
    ===================================================== */
 nav {
   position: fixed;
@@ -58,6 +58,7 @@ nav .logo {
   color: var(--primary);
 }
 
+/* ===== DESKTOP MENU ===== */
 nav ul {
   list-style: none;
   display: flex;
@@ -75,6 +76,63 @@ nav ul li:hover {
 }
 
 /* =====================================================
+   📱 MOBILE MENU BUTTON (3 BARS)
+   ===================================================== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 22px;
+  height: 2px;
+  background: white;
+  transition: 0.3s;
+}
+
+/* =====================================================
+   📱 MOBILE DROPDOWN PANEL (SMALL, CORNER)
+   ===================================================== */
+.mobile-menu {
+  position: absolute;
+  top: 64px;
+  right: 40px;
+  background: rgba(15,15,25,0.96);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+  animation: menuDrop 0.25s ease;
+}
+
+.mobile-menu li {
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--light);
+}
+
+.mobile-menu li:hover {
+  background: rgba(122,60,255,0.25);
+}
+
+/* =====================================================
+   📱 MOBILE RULES
+   ===================================================== */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+}
+
+/* =====================================================
    🦸 HERO SECTION
    ===================================================== */
 .hero {
@@ -82,7 +140,6 @@ nav ul li:hover {
   background:
     linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
     url("https://images.unsplash.com/photo-1612817288484-6f916006741a");
-    /* REPLACE IMAGE: hero background */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -124,7 +181,7 @@ nav ul li:hover {
    🖼 IMAGE SLIDER
    ===================================================== */
 .slider {
-  padding: 80px 0;
+  padding: 80px 40px;
   display: flex;
   gap: 20px;
   overflow-x: auto;
@@ -196,14 +253,13 @@ nav ul li:hover {
    ✨ ANIMATIONS
    ===================================================== */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes menuDrop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 </style>
@@ -214,7 +270,24 @@ nav ul li:hover {
 <!-- ===================== NAV ===================== -->
 <nav>
   <div class="logo">BrandName</div>
+
+  <!-- Desktop menu -->
   <ul>
+    <li>Home</li>
+    <li>Features</li>
+    <li>Gallery</li>
+    <li>Order</li>
+  </ul>
+
+  <!-- Mobile hamburger -->
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Mobile dropdown -->
+  <ul class="mobile-menu" id="mobileMenu">
     <li>Home</li>
     <li>Features</li>
     <li>Gallery</li>
@@ -233,23 +306,15 @@ nav ul li:hover {
 
 <!-- ===================== SLIDER ===================== -->
 <section class="slider">
-  <img src="https://images.unsplash.com/photo-1582582429416-5d6d9a6b67b8" alt="">
-  <!-- REPLACE IMAGE: slide 1 -->
-
-  <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed" alt="">
-  <!-- REPLACE IMAGE: slide 2 -->
-
-  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="">
-  <!-- REPLACE IMAGE: slide 3 -->
-
-  <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf" alt="">
-  <!-- REPLACE IMAGE: slide 4 -->
+  <img src="https://images.unsplash.com/photo-1582582429416-5d6d9a6b67b8">
+  <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed">
+  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+  <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf">
 </section>
 
 <!-- ===================== INFO 1 ===================== -->
 <section class="section">
   <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
-  <!-- REPLACE IMAGE: info section 1 -->
   <div>
     <h2>Designed for Modern Living</h2>
     <p>Clean design, durable materials, and premium finish.</p>
@@ -263,7 +328,6 @@ nav ul li:hover {
     <p>Simple setup that fits any home environment.</p>
   </div>
   <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c">
-  <!-- REPLACE IMAGE: info section 2 -->
 </section>
 
 <!-- ===================== CTA ===================== -->
@@ -271,6 +335,23 @@ nav ul li:hover {
   <h2>Ready to Upgrade Your Home?</h2>
   <button>Order Now</button>
 </section>
+
+<!-- ===================== SCRIPT ===================== -->
+<script>
+const toggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+toggle.addEventListener("click", () => {
+  mobileMenu.style.display =
+    mobileMenu.style.display === "flex" ? "none" : "flex";
+});
+
+document.addEventListener("click", (e) => {
+  if (!toggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+    mobileMenu.style.display = "none";
+  }
+});
+</script>
 
 </body>
 </html>
