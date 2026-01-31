@@ -14,7 +14,6 @@
    EDITABLE: GLOBAL DESIGN VARIABLES
    ================================================== */
 :root {
-  --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   --card-bg: rgba(255,255,255,0.08);
   --accent: #00ffd5;
   --text-main: #ffffff;
@@ -31,11 +30,29 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: var(--bg-gradient);
+
+  /* =======================
+     EDITABLE: BACKGROUND IMAGE
+     ======================= */
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
   justify-content: center;
+}
+
+/* Optional dark overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: -1;
 }
 
 /* ==================================================
@@ -61,7 +78,7 @@ body {
    ================================================== */
 .card {
   background: var(--card-bg);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   margin: 16px;
   padding: 18px;
   border-radius: 18px;
@@ -84,10 +101,8 @@ body {
 }
 
 /* ==================================================
-   EDITABLE: QUANTITY DROPDOWN (FIXED)
+   QUANTITY DROPDOWN (TOP LAYER)
    ================================================== */
-
-/* IMPORTANT: this creates a TOP layer */
 .quantity-layer {
   position: relative;
   z-index: 9999;
@@ -98,14 +113,13 @@ body {
 }
 
 .quantity-selected {
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.4);
   padding: 14px;
   border-radius: 12px;
   cursor: pointer;
   text-align: center;
 }
 
-/* THE POPUP ITSELF */
 .quantity-list {
   position: absolute;
   top: calc(100% + 10px);
@@ -115,8 +129,6 @@ body {
   border-radius: 12px;
   display: none;
   overflow: hidden;
-
-  /* 🔥 THIS IS THE REAL FIX */
   z-index: 10000;
 }
 
@@ -180,7 +192,7 @@ button:disabled {
 <div class="page">
 
   <!-- =======================
-       EDITABLE: HERO IMAGE
+       HERO IMAGE
        ======================= -->
   <div class="hero">
     <img src="product.jpg" alt="Product">
@@ -195,7 +207,7 @@ button:disabled {
   </div>
 
   <!-- =======================
-       QUANTITY (TOP LAYER)
+       QUANTITY
        ======================= -->
   <div class="card quantity-layer">
     <h2>Quantity</h2>
@@ -260,7 +272,6 @@ quantitySelected.addEventListener("click", (e) => {
     quantityList.style.display === "block" ? "none" : "block";
 });
 
-/* CLOSE WHEN CLICKING OUTSIDE */
 document.addEventListener("click", () => {
   quantityList.style.display = "none";
 });
@@ -280,7 +291,7 @@ quantityList.querySelectorAll("div").forEach(item => {
 });
 
 /* ==================================================
-   FORM VALIDATION (REQUIRED FIELDS)
+   FORM VALIDATION
    ================================================== */
 const orderBtn = document.getElementById("orderBtn");
 const fullName = document.getElementById("fullName");
