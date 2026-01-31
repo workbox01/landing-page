@@ -8,17 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 /* ==================================================
-   EDITABLE COLORS & THEME (EASY EDIT)
+   🔧 EDITABLE THEME SETTINGS (PURPLE)
    ================================================== */
 :root {
-  --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  --bg-gradient: linear-gradient(135deg, #0b0014, #1a0033, #2a004d);
   --card-bg: rgba(255,255,255,0.08);
-  --accent: #00ffd5;
+  --accent: #a855f7;
+  --accent-soft: #c084fc;
   --text-main: #ffffff;
-  --text-soft: #cccccc;
-  --price-color: #00ffd5;
+  --text-soft: #d1c4e9;
+  --price-color: #d8b4fe;
 }
 
 /* ==================================================
@@ -37,9 +37,9 @@ body {
 }
 
 /* ==================================================
-   SMALL TOP CORNER MENU (NEW - ONLY CHANGE)
+   ☰ SMALL CORNER MENU (ONLY UI CHANGE)
    ================================================== */
-.top-bar {
+.top-menu {
   position: fixed;
   top: 14px;
   right: 16px;
@@ -49,45 +49,46 @@ body {
 .menu-btn {
   width: 42px;
   height: 42px;
+  background: rgba(0,0,0,0.55);
   border-radius: 12px;
-  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.menu-btn span {
+.menu-btn span,
+.menu-btn span::before,
+.menu-btn span::after {
+  content: "";
+  display: block;
   width: 20px;
   height: 2px;
   background: #fff;
   position: relative;
 }
 
-.menu-btn span::before,
-.menu-btn span::after {
-  content: "";
+.menu-btn span::before {
   position: absolute;
-  width: 20px;
-  height: 2px;
-  background: #fff;
-  left: 0;
+  top: -6px;
 }
 
-.menu-btn span::before { top: -6px; }
-.menu-btn span::after { top: 6px; }
+.menu-btn span::after {
+  position: absolute;
+  top: 6px;
+}
 
-/* ===== MENU PANEL ===== */
+/* ===== DROPDOWN PANEL ===== */
 .menu-panel {
   position: absolute;
   top: 52px;
   right: 0;
-  background: rgba(0,0,0,0.85);
-  border-radius: 14px;
   width: 180px;
-  padding: 10px;
+  background: rgba(15,0,30,0.95);
+  border-radius: 14px;
+  padding: 8px;
   display: none;
-  animation: menuFade 0.25s ease;
+  animation: menuDrop 0.25s ease;
 }
 
 .menu-panel a {
@@ -100,7 +101,7 @@ body {
 }
 
 .menu-panel a:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(168,85,247,0.25);
 }
 
 /* ==================================================
@@ -126,15 +127,16 @@ body {
    ================================================== */
 .card {
   background: var(--card-bg);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   margin: 16px;
   padding: 18px;
-  border-radius: 18px;
+  border-radius: 20px;
   animation: slideUp 0.8s ease;
 }
 
 .card h2 {
   margin: 0 0 12px;
+  font-weight: 600;
 }
 
 /* ==================================================
@@ -145,14 +147,15 @@ body {
   font-weight: 700;
   color: var(--price-color);
   text-align: center;
+  transition: transform 0.3s ease;
 }
 
 .price.bump {
-  transform: scale(1.15);
+  transform: scale(1.12);
 }
 
 /* ==================================================
-   QUANTITY DROPDOWN (FIXED Z-INDEX)
+   QUANTITY SELECTOR (FIXED OVERLAY)
    ================================================== */
 .quantity-box {
   position: relative;
@@ -160,19 +163,19 @@ body {
 }
 
 .quantity-selected {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.35);
   padding: 14px;
   border-radius: 12px;
-  cursor: pointer;
   text-align: center;
+  cursor: pointer;
 }
 
 .quantity-list {
   position: absolute;
+  top: 110%;
   width: 100%;
-  background: rgba(0,0,0,0.95);
-  border-radius: 12px;
-  margin-top: 8px;
+  background: rgba(15,0,30,0.95);
+  border-radius: 14px;
   display: none;
   z-index: 999;
 }
@@ -183,7 +186,7 @@ body {
 }
 
 .quantity-list div:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(168,85,247,0.25);
 }
 
 /* ==================================================
@@ -195,6 +198,11 @@ input, textarea {
   margin-bottom: 14px;
   border-radius: 12px;
   border: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+textarea {
+  resize: vertical;
 }
 
 /* ==================================================
@@ -204,9 +212,11 @@ button {
   width: 100%;
   padding: 16px;
   font-size: 18px;
-  border-radius: 14px;
+  font-weight: 600;
+  border-radius: 16px;
   border: none;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  color: #000;
   cursor: pointer;
 }
 
@@ -231,18 +241,17 @@ button {
   to { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes menuFade {
-  from { opacity: 0; transform: translateY(-10px); }
+@keyframes menuDrop {
+  from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- ================= SMALL MENU ================= -->
-<div class="top-bar">
+<!-- ================= CORNER MENU ================= -->
+<div class="top-menu">
   <div class="menu-btn" id="menuBtn">
     <span></span>
   </div>
@@ -304,8 +313,14 @@ button {
 </div>
 
 <script>
-/* ================= PRICE LOGIC ================= */
+/* ==================================================
+   🔧 EDITABLE BUSINESS SETTINGS
+   ================================================== */
 const UNIT_PRICE = 50;
+
+/* ==================================================
+   PRICE & QUANTITY LOGIC
+   ================================================== */
 const priceEl = document.getElementById("price");
 const quantitySelected = document.getElementById("quantitySelected");
 const quantityList = document.getElementById("quantityList");
@@ -321,10 +336,14 @@ quantityList.querySelectorAll("div").forEach(item => {
     quantitySelected.textContent = item.textContent;
     quantityList.style.display = "none";
     priceEl.textContent = (q * UNIT_PRICE) + " DH";
+    priceEl.classList.add("bump");
+    setTimeout(() => priceEl.classList.remove("bump"), 300);
   };
 });
 
-/* ================= MENU LOGIC ================= */
+/* ==================================================
+   MENU LOGIC
+   ================================================== */
 const menuBtn = document.getElementById("menuBtn");
 const menuPanel = document.getElementById("menuPanel");
 
@@ -342,4 +361,3 @@ document.addEventListener("click", e => {
 
 </body>
 </html>
-
