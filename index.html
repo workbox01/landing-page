@@ -272,5 +272,268 @@ nav ul li:hover {
   <button>Order Now</button>
 </section>
 
+   <!-- ===================== ORDER SECTION ===================== -->
+<section id="order" class="cta">
+
+  <h2>Complete Your Order</h2>
+
+  <!-- ===== PRICE DISPLAY ===== -->
+  <div id="finalPrice" style="font-size:40px;font-weight:700;color:#7a3cff;margin:20px 0;">
+    50 DH
+  </div>
+
+  <!-- ===== QUANTITY SELECTOR ===== -->
+  <div style="max-width:300px;margin:0 auto 30px;position:relative;z-index:50;">
+
+    <div id="qtySelected"
+      style="background:#111;padding:14px;border-radius:14px;cursor:pointer;">
+      Quantity: 1
+    </div>
+
+    <div id="qtyList"
+      style="display:none;position:absolute;top:60px;width:100%;background:#000;border-radius:14px;overflow:hidden;">
+      <!-- EDIT: MAX QUANTITY -->
+      <div data-q="1">1 item</div>
+      <div data-q="2">2 items</div>
+      <div data-q="3">3 items</div>
+      <div data-q="4">4 items</div>
+      <div data-q="5">5 items</div>
+    </div>
+
+  </div>
+
+  <!-- ===== ORDER FORM ===== -->
+  <form id="orderForm" style="max-width:420px;margin:0 auto;">
+
+    <!-- EDIT: FORM FIELDS -->
+    <input required placeholder="Full Name" class="finput">
+    <input required placeholder="Phone (06XXXXXXXX)" pattern="0[67][0-9]{8}" class="finput">
+    <input required type="email" placeholder="Email" class="finput">
+    <textarea required placeholder="Shipping Address" class="finput"></textarea>
+    <textarea placeholder="Remarks (optional)" class="finput"></textarea>
+
+    <button id="orderBtn" disabled
+      style="margin-top:20px;padding:18px;width:100%;border:none;border-radius:50px;
+      background:#7a3cff;color:#fff;font-size:18px;opacity:.4;cursor:not-allowed;">
+      PLACE ORDER
+    </button>
+
+  </form>
+</section>
+
+<style>
+/* ===== FORM INPUT STYLE ===== */
+.finput {
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:14px;
+  border:none;
+  font-family:Poppins;
+}
+#qtyList div {
+  padding:12px;
+  cursor:pointer;
+}
+#qtyList div:hover {
+  background:#7a3cff;
+}
+</style>
+
+<script>
+/* =====================================================
+   ⚙️ EDITABLE SETTINGS
+   ===================================================== */
+const UNIT_PRICE = 50; // EDIT: UNIT PRICE
+
+/* =====================================================
+   💰 PRICE + QUANTITY LOGIC
+   ===================================================== */
+let qty = 1;
+const priceEl = document.getElementById("finalPrice");
+const qtySelected = document.getElementById("qtySelected");
+const qtyList = document.getElementById("qtyList");
+
+qtySelected.onclick = () => {
+  qtyList.style.display = qtyList.style.display === "block" ? "none" : "block";
+};
+
+qtyList.querySelectorAll("div").forEach(item => {
+  item.onclick = () => {
+    qty = item.dataset.q;
+    qtySelected.innerText = "Quantity: " + qty;
+    qtyList.style.display = "none";
+    priceEl.innerText = (qty * UNIT_PRICE) + " DH";
+  };
+});
+
+/* =====================================================
+   ✅ FORM VALIDATION
+   ===================================================== */
+const form = document.getElementById("orderForm");
+const btn = document.getElementById("orderBtn");
+
+form.addEventListener("input", () => {
+  btn.disabled = !form.checkValidity();
+  btn.style.opacity = btn.disabled ? ".4" : "1";
+  btn.style.cursor = btn.disabled ? "not-allowed" : "pointer";
+});
+</script>
+
+   <!-- ===================== BASKET FLOAT BUTTON ===================== -->
+<div id="basketBtn">🧺</div>
+
+<style>
+/* EDIT: BASKET BUTTON */
+#basketBtn{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#7a3cff;
+  color:#fff;
+  font-size:26px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:9999;
+  box-shadow:0 10px 30px rgba(122,60,255,.5);
+}
+</style>
+<!-- ===================== BASKET POPUP ===================== -->
+<div id="basketOverlay">
+  <div id="basketBox">
+
+    <h3>Your Basket</h3>
+
+    <!-- PRODUCT LINE -->
+    <div class="basketRow">
+      <span>Product</span>
+      <div class="qtyControl">
+        <button onclick="changeQty(-1)">−</button>
+        <span id="basketQty">1</span>
+        <button onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <!-- TOTAL -->
+    <div class="basketTotal">
+      Total: <span id="basketTotal">50</span> DH
+    </div>
+
+    <!-- FINISH -->
+    <button id="finishOrderBtn">FINISH ORDER</button>
+
+  </div>
+</div>
+
+<style>
+/* ===================== BASKET POPUP STYLE ===================== */
+#basketOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9998;
+}
+
+#basketBox{
+  background:#0b0b0f;
+  border-radius:20px;
+  padding:30px;
+  width:90%;
+  max-width:400px;
+  animation:fadeUp .4s ease;
+}
+
+.basketRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:20px 0;
+}
+
+.qtyControl{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.qtyControl button{
+  width:32px;
+  height:32px;
+  border:none;
+  border-radius:50%;
+  background:#7a3cff;
+  color:#fff;
+  cursor:pointer;
+}
+
+.basketTotal{
+  font-size:22px;
+  margin:20px 0;
+}
+
+#finishOrderBtn{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:40px;
+  background:#7a3cff;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+</style>
+<script>
+/* =====================================================
+   🧺 BASKET LOGIC (CONNECTED TO STEP 2)
+   ===================================================== */
+
+const basketBtn = document.getElementById("basketBtn");
+const basketOverlay = document.getElementById("basketOverlay");
+const basketQtyEl = document.getElementById("basketQty");
+const basketTotalEl = document.getElementById("basketTotal");
+
+/* EDIT: must match STEP 2 */
+const MAX_QTY = 5;
+
+/* OPEN / CLOSE */
+basketBtn.onclick = () => basketOverlay.style.display = "flex";
+basketOverlay.onclick = e => {
+  if(e.target === basketOverlay) basketOverlay.style.display = "none";
+};
+
+/* SYNC FROM STEP 2 */
+function syncBasket(){
+  basketQtyEl.innerText = qty;
+  basketTotalEl.innerText = qty * UNIT_PRICE;
+}
+syncBasket();
+
+/* CHANGE QTY INSIDE BASKET */
+function changeQty(val){
+  qty += val;
+  if(qty < 1) qty = 1;
+  if(qty > MAX_QTY) qty = MAX_QTY;
+
+  // update everywhere
+  document.getElementById("qtySelected").innerText = "Quantity: " + qty;
+  document.getElementById("finalPrice").innerText = (qty * UNIT_PRICE) + " DH";
+  syncBasket();
+}
+
+/* FINISH ORDER ACTION (FOR LATER N8N) */
+document.getElementById("finishOrderBtn").onclick = () => {
+  basketOverlay.style.display = "none";
+  document.getElementById("order").scrollIntoView({behavior:"smooth"});
+};
+</script>
+
 </body>
 </html>
